@@ -1,0 +1,48 @@
+{
+  "axis1_structural_validity": {
+    "primary": [
+      "AUROC",
+      "AUPR (OOD=positive)"
+    ],
+    "secondary": [
+      "FPR@95TPR",
+      "Detection Accuracy"
+    ],
+    "threshold_free": true,
+    "note": "Compare valid vs invalid graphs. Positive class = invalid."
+  },
+  "axis2_semantic_novelty": {
+    "primary": [
+      "AUROC",
+      "AUPR (OOD=positive)"
+    ],
+    "secondary": [
+      "FPR@95TPR",
+      "Detection Accuracy"
+    ],
+    "threshold_free": true,
+    "note": "Compare ID test vs ood_valid. Positive class = OOD."
+  },
+  "combined_dual_axis": {
+    "primary": [
+      "Mean AUROC (axis1 + axis2) / 2"
+    ],
+    "secondary": [
+      "Harmonic Mean AUROC"
+    ],
+    "note": "Equal weighting of both axes unless domain priority is specified."
+  },
+  "result_format": {
+    "required_columns": [
+      "model_name",
+      "split",
+      "axis",
+      "metric",
+      "value",
+      "seed",
+      "timestamp"
+    ],
+    "score_range": "[0,1] for AUROC/AUPR; [0,100] for percentage metrics",
+    "reporting": "Mean \u00b1 std over \u22653 seeds"
+  }
+}

@@ -1,0 +1,7 @@
+metric,id_mean,ood_mean,id_median,ood_median,mann_whitney_p,cohens_d,significant_p005,effect_size
+Atom Count,18.443,19.688,16.0,18.0,0.000987,-0.1074,True,negligible
+Molecular Weight (Da),274.521,290.757,238.287,266.341,0.001448,-0.0973,True,negligible
+Ring Count,1.809,1.958,1.0,2.0,0.00042,-0.0492,True,negligible
+Aromatic Atom Count,6.267,5.866,6.0,5.0,0.005455,0.0632,True,negligible
+LogP,2.357,2.529,2.345,2.618,0.023936,-0.0748,True,negligible
+TPSA (Å²),59.427,59.875,46.53,47.91,0.791378,-0.0078,False,negligible

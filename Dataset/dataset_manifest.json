@@ -1,0 +1,32 @@
+{
+  "project": "Dual-Axis Out-of-Distribution Detection",
+  "dataset": "Tox21",
+  "random_seed": 42,
+  "split_strategy": {
+    "id_train": "70% of the complete valid dataset",
+    "id_val": "10% of the complete valid dataset",
+    "id_test": "10% of the complete valid dataset",
+    "ood_valid": "10% of the complete valid dataset",
+    "ood_definition": "Scaffold-held-out; acyclic molecules use canonical SMILES as a fallback scaffold key"
+  },
+  "valid_molecule_counts": {
+    "id_train": 5476,
+    "id_val": 782,
+    "id_test": 783,
+    "ood_valid": 782
+  },
+  "invalid_graph_generation": {
+    "method": "add_bond_overvalent_carbon_v3",
+    "train": 3237,
+    "val": 481,
+    "test": 477,
+    "total": 4195
+  },
+  "reconstruction_validation": {
+    "total_graphs": 4195,
+    "sanitization_failures": 4195,
+    "reconstruction_errors": 0,
+    "all_graphs_failed_sanitization": true
+  },
+  "created_at_utc": "2026-10-11T12:19:37.135636+00:00"
+}
