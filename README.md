@@ -131,8 +131,8 @@ Dual-Axis OOD Detection/
 ### 1. Installation
 Clone the repository and install dependencies:
 ```bash
-git clone https://github.com/YOUR_USERNAME/dual-axis-ood-detection.git
-cd dual-axis-ood-detection
+git clone https://github.com/Amrendra21/Dual-Axis-OOD-Detection.git
+cd Dual-Axis-OOD-Detection
 pip install -r requirements.txt
 ```
 
