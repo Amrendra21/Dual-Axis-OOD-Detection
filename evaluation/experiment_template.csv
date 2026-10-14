@@ -1,0 +1,43 @@
+experiment_id,model_name,backbone,ood_detector,axis,split_id,split_ood,seed,status,auroc,aupr_out,aupr_in,fpr95,notes
+EXP_001,RandomForest_ECFP4,ECFP4_Radius2,MSP,axis1_structural_validity,id_test.csv,invalid_graphs_test.csv,42,PLANNED,,,,,Baseline fingerprint model on physical valency violation
+EXP_002,RandomForest_ECFP4,ECFP4_Radius2,MSP,axis1_structural_validity,id_test.csv,invalid_graphs_test.csv,123,PLANNED,,,,,Baseline fingerprint model on physical valency violation
+EXP_003,RandomForest_ECFP4,ECFP4_Radius2,MSP,axis1_structural_validity,id_test.csv,invalid_graphs_test.csv,456,PLANNED,,,,,Baseline fingerprint model on physical valency violation
+EXP_004,RandomForest_ECFP4,ECFP4_Radius2,MSP,axis2_semantic_novelty,id_test.csv,ood_valid.csv,42,PLANNED,,,,,Baseline fingerprint model on scaffold novelty
+EXP_005,RandomForest_ECFP4,ECFP4_Radius2,MSP,axis2_semantic_novelty,id_test.csv,ood_valid.csv,123,PLANNED,,,,,Baseline fingerprint model on scaffold novelty
+EXP_006,RandomForest_ECFP4,ECFP4_Radius2,MSP,axis2_semantic_novelty,id_test.csv,ood_valid.csv,456,PLANNED,,,,,Baseline fingerprint model on scaffold novelty
+EXP_007,GCN_MSP,GCN,MSP,axis1_structural_validity,id_test.csv,invalid_graphs_test.csv,42,PLANNED,,,,,GCN standard softmax confidence baseline
+EXP_008,GCN_MSP,GCN,MSP,axis1_structural_validity,id_test.csv,invalid_graphs_test.csv,123,PLANNED,,,,,GCN standard softmax confidence baseline
+EXP_009,GCN_MSP,GCN,MSP,axis1_structural_validity,id_test.csv,invalid_graphs_test.csv,456,PLANNED,,,,,GCN standard softmax confidence baseline
+EXP_010,GCN_MSP,GCN,MSP,axis2_semantic_novelty,id_test.csv,ood_valid.csv,42,PLANNED,,,,,GCN standard softmax confidence baseline
+EXP_011,GCN_MSP,GCN,MSP,axis2_semantic_novelty,id_test.csv,ood_valid.csv,123,PLANNED,,,,,GCN standard softmax confidence baseline
+EXP_012,GCN_MSP,GCN,MSP,axis2_semantic_novelty,id_test.csv,ood_valid.csv,456,PLANNED,,,,,GCN standard softmax confidence baseline
+EXP_013,GCN_Energy,GCN,Energy,axis1_structural_validity,id_test.csv,invalid_graphs_test.csv,42,PLANNED,,,,,Energy-based score on GCN logits
+EXP_014,GCN_Energy,GCN,Energy,axis1_structural_validity,id_test.csv,invalid_graphs_test.csv,123,PLANNED,,,,,Energy-based score on GCN logits
+EXP_015,GCN_Energy,GCN,Energy,axis1_structural_validity,id_test.csv,invalid_graphs_test.csv,456,PLANNED,,,,,Energy-based score on GCN logits
+EXP_016,GCN_Energy,GCN,Energy,axis2_semantic_novelty,id_test.csv,ood_valid.csv,42,PLANNED,,,,,Energy-based score on GCN logits
+EXP_017,GCN_Energy,GCN,Energy,axis2_semantic_novelty,id_test.csv,ood_valid.csv,123,PLANNED,,,,,Energy-based score on GCN logits
+EXP_018,GCN_Energy,GCN,Energy,axis2_semantic_novelty,id_test.csv,ood_valid.csv,456,PLANNED,,,,,Energy-based score on GCN logits
+EXP_019,GIN_MSP,GIN,MSP,axis1_structural_validity,id_test.csv,invalid_graphs_test.csv,42,PLANNED,,,,,GIN standard softmax baseline
+EXP_020,GIN_MSP,GIN,MSP,axis1_structural_validity,id_test.csv,invalid_graphs_test.csv,123,PLANNED,,,,,GIN standard softmax baseline
+EXP_021,GIN_MSP,GIN,MSP,axis1_structural_validity,id_test.csv,invalid_graphs_test.csv,456,PLANNED,,,,,GIN standard softmax baseline
+EXP_022,GIN_MSP,GIN,MSP,axis2_semantic_novelty,id_test.csv,ood_valid.csv,42,PLANNED,,,,,GIN standard softmax baseline
+EXP_023,GIN_MSP,GIN,MSP,axis2_semantic_novelty,id_test.csv,ood_valid.csv,123,PLANNED,,,,,GIN standard softmax baseline
+EXP_024,GIN_MSP,GIN,MSP,axis2_semantic_novelty,id_test.csv,ood_valid.csv,456,PLANNED,,,,,GIN standard softmax baseline
+EXP_025,GIN_Energy,GIN,Energy,axis1_structural_validity,id_test.csv,invalid_graphs_test.csv,42,PLANNED,,,,,Energy score on GIN representations
+EXP_026,GIN_Energy,GIN,Energy,axis1_structural_validity,id_test.csv,invalid_graphs_test.csv,123,PLANNED,,,,,Energy score on GIN representations
+EXP_027,GIN_Energy,GIN,Energy,axis1_structural_validity,id_test.csv,invalid_graphs_test.csv,456,PLANNED,,,,,Energy score on GIN representations
+EXP_028,GIN_Energy,GIN,Energy,axis2_semantic_novelty,id_test.csv,ood_valid.csv,42,PLANNED,,,,,Energy score on GIN representations
+EXP_029,GIN_Energy,GIN,Energy,axis2_semantic_novelty,id_test.csv,ood_valid.csv,123,PLANNED,,,,,Energy-based score on GIN representations
+EXP_030,GIN_Energy,GIN,Energy,axis2_semantic_novelty,id_test.csv,ood_valid.csv,456,PLANNED,,,,,Energy score on GIN representations
+EXP_031,GAT_Mahalanobis,GAT,Mahalanobis,axis1_structural_validity,id_test.csv,invalid_graphs_test.csv,42,PLANNED,,,,,Feature-space Mahalanobis distance with GAT
+EXP_032,GAT_Mahalanobis,GAT,Mahalanobis,axis1_structural_validity,id_test.csv,invalid_graphs_test.csv,123,PLANNED,,,,,Feature-space Mahalanobis distance with GAT
+EXP_033,GAT_Mahalanobis,GAT,Mahalanobis,axis1_structural_validity,id_test.csv,invalid_graphs_test.csv,456,PLANNED,,,,,Feature-space Mahalanobis distance with GAT
+EXP_034,GAT_Mahalanobis,GAT,Mahalanobis,axis2_semantic_novelty,id_test.csv,ood_valid.csv,42,PLANNED,,,,,Feature-space Mahalanobis distance with GAT
+EXP_035,GAT_Mahalanobis,GAT,Mahalanobis,axis2_semantic_novelty,id_test.csv,ood_valid.csv,123,PLANNED,,,,,Feature-space Mahalanobis distance with GAT
+EXP_036,GAT_Mahalanobis,GAT,Mahalanobis,axis2_semantic_novelty,id_test.csv,ood_valid.csv,456,PLANNED,,,,,Feature-space Mahalanobis distance with GAT
+EXP_037,ChemBERTa_MSP,Transformer,MSP,axis1_structural_validity,id_test.csv,invalid_graphs_test.csv,42,PLANNED,,,,,Language model baseline on tokenized molecular graphs
+EXP_038,ChemBERTa_MSP,Transformer,MSP,axis1_structural_validity,id_test.csv,invalid_graphs_test.csv,123,PLANNED,,,,,Language model baseline on tokenized molecular graphs
+EXP_039,ChemBERTa_MSP,Transformer,MSP,axis1_structural_validity,id_test.csv,invalid_graphs_test.csv,456,PLANNED,,,,,Language model baseline on tokenized molecular graphs
+EXP_040,ChemBERTa_MSP,Transformer,MSP,axis2_semantic_novelty,id_test.csv,ood_valid.csv,42,PLANNED,,,,,Language model baseline on tokenized molecular graphs
+EXP_041,ChemBERTa_MSP,Transformer,MSP,axis2_semantic_novelty,id_test.csv,ood_valid.csv,123,PLANNED,,,,,Language model baseline on tokenized molecular graphs
+EXP_042,ChemBERTa_MSP,Transformer,MSP,axis2_semantic_novelty,id_test.csv,ood_valid.csv,456,PLANNED,,,,,Language model baseline on tokenized molecular graphs

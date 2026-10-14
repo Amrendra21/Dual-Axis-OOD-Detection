@@ -1,0 +1,7 @@
+sample_id,model_name,benchmark,true_label,ood_score,seed
+mol_001,GCN_Energy,axis1_structural_validity,0,0.12,42
+mol_002,GCN_Energy,axis1_structural_validity,0,0.28,42
+mol_003,GCN_Energy,axis1_structural_validity,1,0.89,42
+mol_004,GCN_Energy,axis2_semantic_novelty,0,0.15,42
+mol_005,GCN_Energy,axis2_semantic_novelty,1,0.74,42
+mol_006,GCN_Energy,axis2_semantic_novelty,1,0.82,42
