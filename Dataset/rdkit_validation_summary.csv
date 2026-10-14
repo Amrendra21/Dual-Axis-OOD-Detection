@@ -1,4 +1,0 @@
-split,total,sanitization_failed,reconstruction_errors,sanitization_passed,failure_rate_pct
-test,477,477,0,0,100.0
-train,3237,3237,0,0,100.0
-val,481,481,0,0,100.0
