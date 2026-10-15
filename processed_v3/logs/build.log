@@ -1,0 +1,35 @@
+04:53:40 | INFO    | versions: {'python': '3.13.16', 'platform': 'Linux-6.6.122+-x86_64-with-glibc2.39', 'numpy': '2.1.3', 'pandas': '2.2.3', 'torch': '2.11.0+cpu', 'rdkit': '2026.09.1', 'sklearn': '1.6.1'}
+04:53:40 | INFO    | raw hashes: {'tox21': '45d09792492c', 'sider': '4cc7ccb20dde'}
+04:53:40 | INFO    | loaded Tox21 7831 rows, SIDER 1427 rows
+04:53:45 | INFO    | [tox21] cleaned 7785 / 7831 rows (244 had >1 fragment; largest kept)
+04:53:47 | INFO    | [sider] cleaned 1349 / 1427 rows (182 had >1 fragment; largest kept)
+04:53:48 | INFO    | [tox21] de-dup: 182 duplicate groups, 240 rows removed, 95 (task,group) label conflicts -> NaN
+04:53:48 | INFO    | [sider] de-dup: 40 duplicate groups, 46 rows removed, 0 (task,group) label conflicts -> NaN
+04:53:51 | INFO    | [sider] removed 880 molecules that also occur in Tox21
+04:53:51 | INFO    | novel-scaffold pool: 407 scaffold groups (17.9% of cyclic groups), 755 molecules (10.0% of Tox21)
+04:53:51 | INFO    | Tox21 partition (scaffold split): {'id_train': 5432, 'novel_scaffold_pool': 755, 'id_test': 679, 'id_val': 679}
+04:53:51 | INFO    | novel_scaffold_val: 408 molecules (ID val size = 679) size_matched=False
+04:53:51 | INFO    | novel_scaffold_test: 347 molecules (ID test size = 679) size_matched=False
+04:53:51 | INFO    | novel_dataset_val: 225 molecules (ID val size = 679) size_matched=False
+04:53:51 | INFO    | novel_dataset_test: 198 molecules (ID test size = 679) size_matched=False
+04:53:52 | INFO    | corrupt_train: quota {'A': 543, 'B': 543} achieved {'A': 543, 'B': 543}
+04:53:53 | INFO    | corrupt_val: quota {'A': 272, 'B': 271} achieved {'A': 272, 'B': 271}
+04:53:54 | INFO    | corrupt_test: quota {'A': 181, 'B': 181, 'C': 181} achieved {'A': 181, 'B': 181, 'C': 181}
+04:54:01 | INFO    | size-matched controls: 1093 / 1178 novelty graphs matched
+04:54:05 | WARNING | AUDIT WARNING: constant atom features across the whole dataset: ['degree_0', 'num_h_4plus']
+04:54:05 | WARNING | AUDIT WARNING: constant bond features across the whole dataset: ['bond_other']
+04:54:10 | WARNING | AUDIT WARNING: validity shortcut: count-only AUROC 0.721 for valid vs corrupted (train, family B); size/composition alone separates them
+04:54:15 | WARNING | AUDIT WARNING: validity shortcut: count-only AUROC 0.652 for valid vs corrupted (val, family B); size/composition alone separates them
+04:54:19 | WARNING | AUDIT WARNING: validity shortcut: count-only AUROC 0.652 for valid vs corrupted (test, family B); size/composition alone separates them
+04:54:20 | WARNING | AUDIT WARNING: validity shortcut: count-only AUROC 0.798 for valid vs corrupted (test, family C); size/composition alone separates them
+04:54:22 | WARNING | AUDIT WARNING: novelty shortcut: count-only AUROC 0.752 for ID vs novel_scaffold_val; size/composition alone separates them (see novelty_size_matched)
+04:54:24 | WARNING | AUDIT WARNING: novelty shortcut: count-only AUROC 0.728 for ID vs novel_dataset_val; size/composition alone separates them (see novelty_size_matched)
+04:54:25 | WARNING | AUDIT WARNING: novelty shortcut: count-only AUROC 0.755 for ID vs novel_scaffold_test; size/composition alone separates them (see novelty_size_matched)
+04:54:27 | WARNING | AUDIT WARNING: novelty shortcut: count-only AUROC 0.693 for ID vs novel_dataset_test; size/composition alone separates them (see novelty_size_matched)
+04:54:27 | WARNING | AUDIT WARNING: pair-level count cue (train, family B): in >50% of pairs the corrupted graph differs from its twin in: degree_hist
+04:54:27 | WARNING | AUDIT WARNING: pair-level count cue (val, family B): in >50% of pairs the corrupted graph differs from its twin in: degree_hist
+04:54:27 | WARNING | AUDIT WARNING: pair-level count cue (test, family B): in >50% of pairs the corrupted graph differs from its twin in: degree_hist
+04:54:27 | WARNING | AUDIT WARNING: pair-level count cue (test, family C): in >50% of pairs the corrupted graph differs from its twin in: element_counts
+04:54:28 | WARNING | AUDIT WARNING: novelty shortcut remains after size matching: AUROC 0.689 for novel_scaffold_val (composition/degree structure, not size)
+04:54:29 | WARNING | AUDIT WARNING: novelty shortcut remains after size matching: AUROC 0.664 for novel_dataset_val (composition/degree structure, not size)
+04:54:37 | INFO    | DONE. 10140 graphs, 16 warnings. Output: processed_v3
