@@ -5,11 +5,18 @@ Reads prediction CSV files from actual model evaluations, computes standard
 metrics (AUROC, AUPR-Out, AUPR-In, FPR95) separately for each evaluated benchmark,
 and outputs formatted summaries and CSV reports.
 
+Benchmark naming convention (processed_v3 dataset):
+  Axis 1 (validity):  validity/{val,test}/{A,B,C}
+  Axis 2 (novelty):   novelty/{val,test}/{novel_scaffold,novel_dataset}
+
 Strict Non-Fabrication Policy:
 - Evaluates only benchmarks and models physically present in the input file.
 - Never imputes, fabricates, or estimates missing predictions, splits, or metrics.
 - Combined dual-axis metrics are computed only when both Axis 1 and Axis 2 results
   are present in the evaluated predictions.
+- Corruption families A, B, and C are NEVER pooled; each is evaluated independently.
+- Family C has a known element-count shortcut (count-only AUROC 0.798 on test);
+  it is always reported separately and never merged into the headline validity metric.
 """
 
 import argparse
@@ -17,6 +24,7 @@ import os
 import sys
 from typing import Dict, List, Optional, Tuple
 import pandas as pd
+# pyrefly: ignore [missing-import]
 import numpy as np
 
 # Add project root to path for reliable imports
@@ -51,18 +59,42 @@ def detect_column(df: pd.DataFrame, candidates: List[str], required: bool = True
 
 
 def generate_example_predictions_csv(output_path: str) -> None:
-    """Generate an illustrative sample predictions CSV file for documentation."""
+    """Generate an illustrative sample predictions CSV file for documentation.
+
+    Demonstrates the processed_v3 benchmark naming convention:
+      validity/{val,test}/{A,B,C}  and  novelty/{val,test}/{novel_scaffold,novel_dataset}
+
+    SYNTHETIC TEST FIXTURE ONLY — scores are random; do not treat as research results.
+    """
     os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
+    # Each benchmark needs at least one ID (label=0) and one OOD (label=1) row.
+    # true_label comes from split membership, NOT from the molecular task-label tensor.
     sample_data = {
-        "sample_id": ["mol_001", "mol_002", "mol_003", "mol_004", "mol_005", "mol_006"],
-        "model_name": ["GCN_Energy", "GCN_Energy", "GCN_Energy", "GCN_Energy", "GCN_Energy", "GCN_Energy"],
-        "benchmark": [
-            "axis1_structural_validity", "axis1_structural_validity", "axis1_structural_validity",
-            "axis2_semantic_novelty", "axis2_semantic_novelty", "axis2_semantic_novelty"
+        "sample_id": [
+            # validity/test/A: id_test=0, corrupt_test family A=1
+            "T21-00001", "T21-00002", "COR-A-T21-00001",
+            # validity/test/B: id_test=0, corrupt_test family B=1
+            "T21-00001", "T21-00002", "COR-B-T21-00002",
+            # validity/test/C: id_test=0, corrupt_test family C=1 (held-out; report separately)
+            "T21-00001", "T21-00002", "COR-C-T21-00003",
+            # novelty/test/novel_scaffold: id_test=0, novel_scaffold_test=1
+            "T21-00003", "T21-00004", "T21-SCF-00010",
+            # novelty/test/novel_dataset: id_test=0, novel_dataset_test=1 (SIDER; y=NaN)
+            "T21-00003", "T21-00004", "SID-00001",
         ],
-        "true_label": [0, 0, 1, 0, 1, 1],
-        "ood_score": [0.12, 0.28, 0.89, 0.15, 0.74, 0.82],
-        "seed": [42, 42, 42, 42, 42, 42],
+        "model_name": ["GCN_Energy"] * 15,
+        "benchmark": (
+            ["validity/test/A"] * 3
+            + ["validity/test/B"] * 3
+            + ["validity/test/C"] * 3
+            + ["novelty/test/novel_scaffold"] * 3
+            + ["novelty/test/novel_dataset"] * 3
+        ),
+        "true_label": [0, 0, 1,  0, 0, 1,  0, 0, 1,  0, 0, 1,  0, 0, 1],
+        "ood_score":  [0.12, 0.18, 0.87,  0.15, 0.22, 0.79,
+                       0.11, 0.19, 0.93,  0.14, 0.25, 0.68,
+                       0.13, 0.21, 0.71],
+        "seed": [42] * 15,
     }
     df = pd.DataFrame(sample_data)
     df.to_csv(output_path, index=False)
@@ -158,7 +190,23 @@ def evaluate_dataframe(
     if results_df.empty:
         return results_df
 
-    # Calculate combined dual-axis metrics ONLY when both axes are present
+    # Calculate combined dual-axis metrics ONLY when both axes are present.
+    # Axis 1 = validity (corruption detection); Axis 2 = novelty (semantic OOD).
+    #
+    # processed_v3 benchmark names:
+    #   Axis 1: validity/{val,test}/{A,B,C}
+    #   Axis 2: novelty/{val,test}/{novel_scaffold,novel_dataset}
+    #
+    # Legacy names (still accepted for backward compatibility):
+    #   Axis 1: anything containing "axis1", "structural", or "corrupt"
+    #   Axis 2: anything containing "axis2", "semantic", "scaffold",
+    #           "novelty", or "novel_dataset"
+    #
+    # IMPORTANT: Families A, B, C are NEVER pooled; each is its own benchmark.
+    # The combined metric averages over ALL validity and ALL novelty benchmarks
+    # that are present for a given model+seed.  It is never fabricated when only
+    # one axis is available.
+
     combined_records = []
     if "benchmark" in results_df.columns:
         models = results_df["model_name"].unique()
@@ -166,41 +214,84 @@ def evaluate_dataframe(
 
         for m in models:
             for s in seeds:
-                sub = results_df[(results_df["model_name"] == m) & (results_df["seed"] == s)]
-                benchmarks = set(sub["benchmark"].str.lower())
+                sub = results_df[
+                    (results_df["model_name"] == m) & (results_df["seed"] == s)
+                ].copy()
+                benchmarks_lower = sub["benchmark"].str.lower().tolist()
 
-                # Check if both Axis 1 (structural) and Axis 2 (semantic) exist
-                axis1_match = [b for b in benchmarks if "axis1" in b or "structural" in b or "corrupt" in b]
-                axis2_match = [b for b in benchmarks if "axis2" in b or "semantic" in b or "scaffold" in b]
+                def _is_validity(b: str) -> bool:
+                    """Return True if benchmark b is an Axis-1 (validity) benchmark."""
+                    return (
+                        b.startswith("validity/")
+                        or "axis1" in b
+                        or "structural" in b
+                        or ("corrupt" in b and "novelty" not in b)
+                    )
 
-                if axis1_match and axis2_match:
-                    row1 = sub[sub["benchmark"].str.lower() == axis1_match[0]].iloc[0]
-                    row2 = sub[sub["benchmark"].str.lower() == axis2_match[0]].iloc[0]
+                def _is_novelty(b: str) -> bool:
+                    """Return True if benchmark b is an Axis-2 (novelty) benchmark."""
+                    return (
+                        b.startswith("novelty/")
+                        or "axis2" in b
+                        or "semantic" in b
+                        or "novel_scaffold" in b
+                        or "novel_dataset" in b
+                    )
 
-                    mean_auroc = float((row1["auroc"] + row2["auroc"]) / 2.0)
-                    # Harmonic mean AUROC: 2 / (1/a1 + 1/a2)
-                    if row1["auroc"] > 0 and row2["auroc"] > 0:
-                        harmonic_auroc = float(2.0 / ((1.0 / row1["auroc"]) + (1.0 / row2["auroc"])))
-                    else:
-                        harmonic_auroc = 0.0
+                validity_benchmarks = [b for b in benchmarks_lower if _is_validity(b)]
+                novelty_benchmarks = [b for b in benchmarks_lower if _is_novelty(b)]
 
-                    mean_aupr = float((row1["aupr_out"] + row2["aupr_out"]) / 2.0)
-                    mean_fpr95 = float((row1["fpr95"] + row2["fpr95"]) / 2.0)
+                if not (validity_benchmarks and novelty_benchmarks):
+                    # Both axes must be present; do not fabricate the missing one.
+                    continue
 
-                    combined_records.append({
-                        "model_name": m,
-                        "seed": s,
-                        "benchmark": "combined_dual_axis",
-                        "auroc": round(mean_auroc, 4),
-                        "aupr_out": round(mean_aupr, 4),
-                        "aupr_in": round(float((row1["aupr_in"] + row2["aupr_in"]) / 2.0), 4),
-                        "fpr95": round(mean_fpr95, 4),
-                        "fpr95_percent": round(mean_fpr95 * 100.0, 2),
-                        "n_id": int(row1["n_id"] + row2["n_id"]),
-                        "n_ood": int(row1["n_ood"] + row2["n_ood"]),
-                        "n_total": int(row1["n_total"] + row2["n_total"]),
-                        "harmonic_mean_auroc": round(harmonic_auroc, 4),
-                    })
+                # Collect all matching rows for each axis.
+                validity_rows = sub[
+                    sub["benchmark"].str.lower().isin(set(validity_benchmarks))
+                ]
+                novelty_rows = sub[
+                    sub["benchmark"].str.lower().isin(set(novelty_benchmarks))
+                ]
+
+                # Average metrics across all validity benchmarks, then across all
+                # novelty benchmarks, then combine. This preserves per-family
+                # separation in the individual rows while still providing a
+                # useful combined summary.
+                metric_cols = ["auroc", "aupr_out", "aupr_in", "fpr95"]
+                val_means = validity_rows[metric_cols].mean()
+                nov_means = novelty_rows[metric_cols].mean()
+
+                mean_auroc = float((val_means["auroc"] + nov_means["auroc"]) / 2.0)
+                if val_means["auroc"] > 0 and nov_means["auroc"] > 0:
+                    harmonic_auroc = float(
+                        2.0 / (1.0 / val_means["auroc"] + 1.0 / nov_means["auroc"])
+                    )
+                else:
+                    harmonic_auroc = 0.0
+
+                mean_aupr = float((val_means["aupr_out"] + nov_means["aupr_out"]) / 2.0)
+                mean_fpr95 = float((val_means["fpr95"] + nov_means["fpr95"]) / 2.0)
+
+                combined_records.append({
+                    "model_name": m,
+                    "seed": s,
+                    "benchmark": "combined_dual_axis",
+                    "auroc": round(mean_auroc, 4),
+                    "aupr_out": round(mean_aupr, 4),
+                    "aupr_in": round(
+                        float((val_means["aupr_in"] + nov_means["aupr_in"]) / 2.0), 4
+                    ),
+                    "fpr95": round(mean_fpr95, 4),
+                    "fpr95_percent": round(mean_fpr95 * 100.0, 2),
+                    "n_id": int(validity_rows["n_id"].sum() + novelty_rows["n_id"].sum()),
+                    "n_ood": int(validity_rows["n_ood"].sum() + novelty_rows["n_ood"].sum()),
+                    "n_total": int(
+                        validity_rows["n_total"].sum() + novelty_rows["n_total"].sum()
+                    ),
+                    "harmonic_mean_auroc": round(harmonic_auroc, 4),
+                    "n_validity_benchmarks": len(validity_benchmarks),
+                    "n_novelty_benchmarks": len(novelty_benchmarks),
+                })
 
     if combined_records:
         combined_df = pd.DataFrame(combined_records)
