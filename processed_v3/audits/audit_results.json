@@ -1,0 +1,546 @@
+{
+  "schema": {
+    "n_graphs": 10140,
+    "failures": {}
+  },
+  "sanitization": {
+    "valid_failures": 0,
+    "corrupt_not_valence_only": 0,
+    "corrupt_edit_count_mismatch": 0,
+    "corrupt_twin_not_in_split": 0,
+    "n_valid": 7968,
+    "n_corrupt": 2172
+  },
+  "leakage": {
+    "smiles_overlap": {
+      "id_train|id_val": 0,
+      "id_train|id_test": 0,
+      "id_train|novel_scaffold_val": 0,
+      "id_train|novel_scaffold_test": 0,
+      "id_train|novel_dataset_val": 0,
+      "id_train|novel_dataset_test": 0,
+      "id_val|id_test": 0,
+      "id_val|novel_scaffold_val": 0,
+      "id_val|novel_scaffold_test": 0,
+      "id_val|novel_dataset_val": 0,
+      "id_val|novel_dataset_test": 0,
+      "id_test|novel_scaffold_val": 0,
+      "id_test|novel_scaffold_test": 0,
+      "id_test|novel_dataset_val": 0,
+      "id_test|novel_dataset_test": 0,
+      "novel_scaffold_val|novel_scaffold_test": 0,
+      "novel_scaffold_val|novel_dataset_val": 0,
+      "novel_scaffold_val|novel_dataset_test": 0,
+      "novel_scaffold_test|novel_dataset_val": 0,
+      "novel_scaffold_test|novel_dataset_test": 0,
+      "novel_dataset_val|novel_dataset_test": 0
+    },
+    "scaffold_overlap": {
+      "novel_scaffold_val|novel_scaffold_test": 0,
+      "novel_dataset_val|novel_dataset_test": 0,
+      "novel_scaffold_val|id_train": 0,
+      "novel_scaffold_val|id_val": 0,
+      "novel_scaffold_val|id_test": 0,
+      "novel_scaffold_test|id_train": 0,
+      "novel_scaffold_test|id_val": 0,
+      "novel_scaffold_test|id_test": 0,
+      "id_train|id_val": 0,
+      "id_train|id_test": 0,
+      "id_val|id_test": 0,
+      "novel_dataset_val|id_train": 31,
+      "novel_dataset_test|id_train": 31,
+      "id_val|id_train": 0,
+      "id_test|id_train": 0
+    }
+  },
+  "coverage": {
+    "labels": {
+      "id_test": {
+        "NR-AR": {
+          "n_labeled": 626,
+          "n_pos": 23,
+          "n_neg": 603
+        },
+        "NR-AR-LBD": {
+          "n_labeled": 572,
+          "n_pos": 15,
+          "n_neg": 557
+        },
+        "NR-AhR": {
+          "n_labeled": 561,
+          "n_pos": 57,
+          "n_neg": 504
+        },
+        "NR-Aromatase": {
+          "n_labeled": 500,
+          "n_pos": 34,
+          "n_neg": 466
+        },
+        "NR-ER": {
+          "n_labeled": 506,
+          "n_pos": 51,
+          "n_neg": 455
+        },
+        "NR-ER-LBD": {
+          "n_labeled": 585,
+          "n_pos": 15,
+          "n_neg": 570
+        },
+        "NR-PPAR-gamma": {
+          "n_labeled": 528,
+          "n_pos": 25,
+          "n_neg": 503
+        },
+        "SR-ARE": {
+          "n_labeled": 483,
+          "n_pos": 95,
+          "n_neg": 388
+        },
+        "SR-ATAD5": {
+          "n_labeled": 600,
+          "n_pos": 22,
+          "n_neg": 578
+        },
+        "SR-HSE": {
+          "n_labeled": 537,
+          "n_pos": 35,
+          "n_neg": 502
+        },
+        "SR-MMP": {
+          "n_labeled": 483,
+          "n_pos": 72,
+          "n_neg": 411
+        },
+        "SR-p53": {
+          "n_labeled": 564,
+          "n_pos": 38,
+          "n_neg": 526
+        }
+      },
+      "id_train": {
+        "NR-AR": {
+          "n_labeled": 5025,
+          "n_pos": 209,
+          "n_neg": 4816
+        },
+        "NR-AR-LBD": {
+          "n_labeled": 4745,
+          "n_pos": 168,
+          "n_neg": 4577
+        },
+        "NR-AhR": {
+          "n_labeled": 4567,
+          "n_pos": 535,
+          "n_neg": 4032
+        },
+        "NR-Aromatase": {
+          "n_labeled": 4073,
+          "n_pos": 174,
+          "n_neg": 3899
+        },
+        "NR-ER": {
+          "n_labeled": 4378,
+          "n_pos": 569,
+          "n_neg": 3809
+        },
+        "NR-ER-LBD": {
+          "n_labeled": 4871,
+          "n_pos": 249,
+          "n_neg": 4622
+        },
+        "NR-PPAR-gamma": {
+          "n_labeled": 4560,
+          "n_pos": 114,
+          "n_neg": 4446
+        },
+        "SR-ARE": {
+          "n_labeled": 4202,
+          "n_pos": 599,
+          "n_neg": 3603
+        },
+        "SR-ATAD5": {
+          "n_labeled": 4936,
+          "n_pos": 175,
+          "n_neg": 4761
+        },
+        "SR-HSE": {
+          "n_labeled": 4599,
+          "n_pos": 241,
+          "n_neg": 4358
+        },
+        "SR-MMP": {
+          "n_labeled": 4110,
+          "n_pos": 621,
+          "n_neg": 3489
+        },
+        "SR-p53": {
+          "n_labeled": 4759,
+          "n_pos": 269,
+          "n_neg": 4490
+        }
+      },
+      "id_val": {
+        "NR-AR": {
+          "n_labeled": 635,
+          "n_pos": 19,
+          "n_neg": 616
+        },
+        "NR-AR-LBD": {
+          "n_labeled": 564,
+          "n_pos": 16,
+          "n_neg": 548
+        },
+        "NR-AhR": {
+          "n_labeled": 564,
+          "n_pos": 68,
+          "n_neg": 496
+        },
+        "NR-Aromatase": {
+          "n_labeled": 467,
+          "n_pos": 27,
+          "n_neg": 440
+        },
+        "NR-ER": {
+          "n_labeled": 518,
+          "n_pos": 55,
+          "n_neg": 463
+        },
+        "NR-ER-LBD": {
+          "n_labeled": 596,
+          "n_pos": 24,
+          "n_neg": 572
+        },
+        "NR-PPAR-gamma": {
+          "n_labeled": 540,
+          "n_pos": 19,
+          "n_neg": 521
+        },
+        "SR-ARE": {
+          "n_labeled": 450,
+          "n_pos": 91,
+          "n_neg": 359
+        },
+        "SR-ATAD5": {
+          "n_labeled": 605,
+          "n_pos": 28,
+          "n_neg": 577
+        },
+        "SR-HSE": {
+          "n_labeled": 541,
+          "n_pos": 41,
+          "n_neg": 500
+        },
+        "SR-MMP": {
+          "n_labeled": 481,
+          "n_pos": 83,
+          "n_neg": 398
+        },
+        "SR-p53": {
+          "n_labeled": 583,
+          "n_pos": 48,
+          "n_neg": 535
+        }
+      },
+      "novel_scaffold_test": {
+        "NR-AR": {
+          "n_labeled": 315,
+          "n_pos": 21,
+          "n_neg": 294
+        },
+        "NR-AR-LBD": {
+          "n_labeled": 282,
+          "n_pos": 14,
+          "n_neg": 268
+        },
+        "NR-AhR": {
+          "n_labeled": 270,
+          "n_pos": 36,
+          "n_neg": 234
+        },
+        "NR-Aromatase": {
+          "n_labeled": 245,
+          "n_pos": 14,
+          "n_neg": 231
+        },
+        "NR-ER": {
+          "n_labeled": 260,
+          "n_pos": 47,
+          "n_neg": 213
+        },
+        "NR-ER-LBD": {
+          "n_labeled": 292,
+          "n_pos": 25,
+          "n_neg": 267
+        },
+        "NR-PPAR-gamma": {
+          "n_labeled": 274,
+          "n_pos": 12,
+          "n_neg": 262
+        },
+        "SR-ARE": {
+          "n_labeled": 231,
+          "n_pos": 46,
+          "n_neg": 185
+        },
+        "SR-ATAD5": {
+          "n_labeled": 300,
+          "n_pos": 21,
+          "n_neg": 279
+        },
+        "SR-HSE": {
+          "n_labeled": 268,
+          "n_pos": 17,
+          "n_neg": 251
+        },
+        "SR-MMP": {
+          "n_labeled": 240,
+          "n_pos": 47,
+          "n_neg": 193
+        },
+        "SR-p53": {
+          "n_labeled": 284,
+          "n_pos": 29,
+          "n_neg": 255
+        }
+      },
+      "novel_scaffold_val": {
+        "NR-AR": {
+          "n_labeled": 380,
+          "n_pos": 20,
+          "n_neg": 360
+        },
+        "NR-AR-LBD": {
+          "n_labeled": 338,
+          "n_pos": 14,
+          "n_neg": 324
+        },
+        "NR-AhR": {
+          "n_labeled": 343,
+          "n_pos": 56,
+          "n_neg": 287
+        },
+        "NR-Aromatase": {
+          "n_labeled": 307,
+          "n_pos": 31,
+          "n_neg": 276
+        },
+        "NR-ER": {
+          "n_labeled": 289,
+          "n_pos": 33,
+          "n_neg": 256
+        },
+        "NR-ER-LBD": {
+          "n_labeled": 350,
+          "n_pos": 18,
+          "n_neg": 332
+        },
+        "NR-PPAR-gamma": {
+          "n_labeled": 325,
+          "n_pos": 11,
+          "n_neg": 314
+        },
+        "SR-ARE": {
+          "n_labeled": 273,
+          "n_pos": 73,
+          "n_neg": 200
+        },
+        "SR-ATAD5": {
+          "n_labeled": 367,
+          "n_pos": 10,
+          "n_neg": 357
+        },
+        "SR-HSE": {
+          "n_labeled": 316,
+          "n_pos": 22,
+          "n_neg": 294
+        },
+        "SR-MMP": {
+          "n_labeled": 297,
+          "n_pos": 67,
+          "n_neg": 230
+        },
+        "SR-p53": {
+          "n_labeled": 337,
+          "n_pos": 27,
+          "n_neg": 310
+        }
+      }
+    },
+    "vocab_other_element_frac": {
+      "id_train": 0.00062,
+      "id_val": 0.00098,
+      "id_test": 0.00062,
+      "novel_scaffold_val": 0.0,
+      "novel_scaffold_test": 0.00038,
+      "novel_dataset_val": 0.00059,
+      "novel_dataset_test": 0.00017,
+      "corrupt_train": 0.00042,
+      "corrupt_val": 0.00055,
+      "corrupt_test": 0.00068
+    },
+    "corruption": {
+      "train/A": {
+        "quota": 543,
+        "achieved": 543
+      },
+      "train/B": {
+        "quota": 543,
+        "achieved": 543
+      },
+      "val/A": {
+        "quota": 272,
+        "achieved": 272
+      },
+      "val/B": {
+        "quota": 271,
+        "achieved": 271
+      },
+      "test/A": {
+        "quota": 181,
+        "achieved": 181
+      },
+      "test/B": {
+        "quota": 181,
+        "achieved": 181
+      },
+      "test/C": {
+        "quota": 181,
+        "achieved": 181
+      }
+    }
+  },
+  "constant_features": {
+    "constant_atom_features": [
+      "degree_0",
+      "num_h_4plus"
+    ],
+    "constant_bond_features": [
+      "bond_other"
+    ]
+  },
+  "id_balance": {
+    "train": {
+      "n": 5432,
+      "ring_free_frac": 0.2496,
+      "median_atoms": 15.0
+    },
+    "val": {
+      "n": 679,
+      "ring_free_frac": 0.2504,
+      "median_atoms": 21.0
+    },
+    "test": {
+      "n": 679,
+      "ring_free_frac": 0.2489,
+      "median_atoms": 21.0
+    }
+  },
+  "shortcuts": {
+    "validity": {
+      "train/A": 0.5184631621629685,
+      "train/B": 0.7206257780779339,
+      "train/ALL": 0.6248045481791282,
+      "val/A": 0.49270391146149184,
+      "val/B": 0.6523322228804027,
+      "val/ALL": 0.5883028611569934,
+      "test/A": 0.4890641909210001,
+      "test/B": 0.6518319921236136,
+      "test/C": 0.7978380621485935,
+      "test/ALL": 0.6263354461793831
+    },
+    "novelty": {
+      "val/novel_scaffold": 0.7517976262670016,
+      "val/novel_dataset": 0.7280183276059565,
+      "test/novel_scaffold": 0.7545020860478836,
+      "test/novel_dataset": 0.6930683863673555
+    },
+    "threshold": 0.65,
+    "pair_deltas": {
+      "train/A": {
+        "n_pairs": 543,
+        "frac_edge_count_changed": 0.0,
+        "frac_degree_hist_changed": 0.0,
+        "frac_element_counts_changed": 0.0
+      },
+      "train/B": {
+        "n_pairs": 543,
+        "frac_edge_count_changed": 0.0,
+        "frac_degree_hist_changed": 0.8121546961325967,
+        "frac_element_counts_changed": 0.0
+      },
+      "val/A": {
+        "n_pairs": 272,
+        "frac_edge_count_changed": 0.0,
+        "frac_degree_hist_changed": 0.0,
+        "frac_element_counts_changed": 0.0
+      },
+      "val/B": {
+        "n_pairs": 271,
+        "frac_edge_count_changed": 0.0,
+        "frac_degree_hist_changed": 0.7859778597785978,
+        "frac_element_counts_changed": 0.0
+      },
+      "test/A": {
+        "n_pairs": 181,
+        "frac_edge_count_changed": 0.0,
+        "frac_degree_hist_changed": 0.0,
+        "frac_element_counts_changed": 0.0
+      },
+      "test/B": {
+        "n_pairs": 181,
+        "frac_edge_count_changed": 0.0,
+        "frac_degree_hist_changed": 0.7679558011049724,
+        "frac_element_counts_changed": 0.0
+      },
+      "test/C": {
+        "n_pairs": 181,
+        "frac_edge_count_changed": 0.0,
+        "frac_degree_hist_changed": 0.0,
+        "frac_element_counts_changed": 1.0
+      }
+    },
+    "novelty_size_matched": {
+      "val/novel_scaffold": {
+        "n_targets": 408,
+        "n_matched": 372,
+        "auroc": 0.6885189039195283
+      },
+      "test/novel_scaffold": {
+        "n_targets": 347,
+        "n_matched": 323,
+        "auroc": 0.6458750682935712
+      },
+      "val/novel_dataset": {
+        "n_targets": 225,
+        "n_matched": 211,
+        "auroc": 0.6636980301430786
+      },
+      "test/novel_dataset": {
+        "n_targets": 198,
+        "n_matched": 187,
+        "auroc": 0.6292001487031371
+      }
+    }
+  },
+  "issues": {
+    "errors": [],
+    "warnings": [
+      "constant atom features across the whole dataset: ['degree_0', 'num_h_4plus']",
+      "constant bond features across the whole dataset: ['bond_other']",
+      "validity shortcut: count-only AUROC 0.721 for valid vs corrupted (train, family B); size/composition alone separates them",
+      "validity shortcut: count-only AUROC 0.652 for valid vs corrupted (val, family B); size/composition alone separates them",
+      "validity shortcut: count-only AUROC 0.652 for valid vs corrupted (test, family B); size/composition alone separates them",
+      "validity shortcut: count-only AUROC 0.798 for valid vs corrupted (test, family C); size/composition alone separates them",
+      "novelty shortcut: count-only AUROC 0.752 for ID vs novel_scaffold_val; size/composition alone separates them (see novelty_size_matched)",
+      "novelty shortcut: count-only AUROC 0.728 for ID vs novel_dataset_val; size/composition alone separates them (see novelty_size_matched)",
+      "novelty shortcut: count-only AUROC 0.755 for ID vs novel_scaffold_test; size/composition alone separates them (see novelty_size_matched)",
+      "novelty shortcut: count-only AUROC 0.693 for ID vs novel_dataset_test; size/composition alone separates them (see novelty_size_matched)",
+      "pair-level count cue (train, family B): in >50% of pairs the corrupted graph differs from its twin in: degree_hist",
+      "pair-level count cue (val, family B): in >50% of pairs the corrupted graph differs from its twin in: degree_hist",
+      "pair-level count cue (test, family B): in >50% of pairs the corrupted graph differs from its twin in: degree_hist",
+      "pair-level count cue (test, family C): in >50% of pairs the corrupted graph differs from its twin in: element_counts",
+      "novelty shortcut remains after size matching: AUROC 0.689 for novel_scaffold_val (composition/degree structure, not size)",
+      "novelty shortcut remains after size matching: AUROC 0.664 for novel_dataset_val (composition/degree structure, not size)"
+    ]
+  }
+}

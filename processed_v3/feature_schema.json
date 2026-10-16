@@ -1,0 +1,62 @@
+{
+  "atom_features": [
+    "elem_C",
+    "elem_N",
+    "elem_O",
+    "elem_S",
+    "elem_F",
+    "elem_Cl",
+    "elem_Br",
+    "elem_I",
+    "elem_P",
+    "elem_B",
+    "elem_Si",
+    "elem_Se",
+    "elem_other",
+    "degree_0",
+    "degree_1",
+    "degree_2",
+    "degree_3",
+    "degree_4",
+    "degree_5plus",
+    "charge_m1",
+    "charge_0",
+    "charge_p1",
+    "charge_other",
+    "num_h_0",
+    "num_h_1",
+    "num_h_2",
+    "num_h_3",
+    "num_h_4plus",
+    "is_aromatic",
+    "in_ring"
+  ],
+  "bond_features": [
+    "bond_single",
+    "bond_double",
+    "bond_triple",
+    "bond_aromatic",
+    "bond_other",
+    "bond_in_ring"
+  ],
+  "y": [
+    "NR-AR",
+    "NR-AR-LBD",
+    "NR-AhR",
+    "NR-Aromatase",
+    "NR-ER",
+    "NR-ER-LBD",
+    "NR-PPAR-gamma",
+    "SR-ARE",
+    "SR-ATAD5",
+    "SR-HSE",
+    "SR-MMP",
+    "SR-p53"
+  ],
+  "edge_index": "2 x E, both directions per bond",
+  "families": {
+    "A": "bond-order inflation on a non-aromatic single/double bond",
+    "B": "bond relocation: one end of an existing single bond is moved onto a saturated atom (bond count unchanged, graph stays connected)",
+    "C": "carbon -> oxygen atom swap (test only: held-out corruption family)"
+  }
+}
