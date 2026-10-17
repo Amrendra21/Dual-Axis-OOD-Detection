@@ -8,6 +8,56 @@
 
 ---
 
+## 🗂️ Repository Structure
+
+```
+Dual-Axis OOD Detection/
+│
+├── README.md                                 ← This file
+├── LICENSE                                   ← MIT License
+├── .gitignore
+│
+├── docs/                                     ← Project documentation
+│   ├── DATA_CARD.md                          ← Comprehensive dataset documentation & evaluation rules
+│   ├── Final Report The Dual-Axis Molecule Dataset (Version 3).pdf
+│   └── The Whole Project.docx
+│
+├── audits/                                   ← Independent audit deliverables
+│   ├── dataset_integrity_report.md           ← Integrity: counts, shapes, leakage, twin mapping
+│   ├── corruption_validation_report.md       ← Corruption families A/B/C validation
+│   ├── novelty_analysis.md                   ← Scaffold vs. dataset novelty analysis
+│   └── notebooks/
+│       └── shortcut_audit.ipynb              ← Executable shortcut AUROC reproduction notebook
+│
+└── processed_v3/                             ← Dataset package (pre-built PyTorch tensors)
+    ├── BUILD_REPORT.md                       ← Build statistics & shortcut audit warnings
+    ├── config.json                           ← Build config, seeds, SHA-256 checksums
+    ├── feature_schema.json                   ← Feature definitions (30 atom, 6 bond features)
+    ├── graphs/                               ← Pre-computed graph tensor files (.pt)
+    │   ├── id_train.pt                       ← 5,432 in-distribution training graphs
+    │   ├── id_val.pt                         ← 679 in-distribution validation graphs
+    │   ├── id_test.pt                        ← 679 in-distribution test graphs
+    │   ├── novel_scaffold_val.pt             ← 408 held-out scaffold validation graphs
+    │   ├── novel_scaffold_test.pt            ← 347 held-out scaffold test graphs
+    │   ├── novel_dataset_val.pt              ← 225 SIDER dataset-shift validation graphs
+    │   ├── novel_dataset_test.pt             ← 198 SIDER dataset-shift test graphs
+    │   ├── corrupt_train.pt                  ← 1,086 corrupted training graphs (Families A, B)
+    │   ├── corrupt_val.pt                    ← 543 corrupted validation graphs (Families A, B)
+    │   └── corrupt_test.pt                   ← 543 corrupted test graphs (Families A, B, C)
+    ├── tables/                               ← Metadata & mapping tables (CSV)
+    │   ├── master_table.csv                  ← 10,140 rows × 33 columns (SMILES, splits, labels)
+    │   ├── eligible_pairs.csv                ← Corrupted graph → valid twin mapping (2,172 pairs)
+    │   ├── matched_controls.csv              ← Novelty target → size-matched ID control (1,178 pairs)
+    │   └── dropped_rows.csv                  ← Curation log of filtered molecules
+    ├── splits/
+    │   └── split_ids.json                    ← JSON mapping of split names to graph UIDs
+    ├── audits/
+    │   └── audit_results.json                ← Quantitative build audit metrics & shortcut baselines
+    └── logs/                                 ← Build pipeline logs
+```
+
+---
+
 ## 🎯 Conceptual Framework
 
 Traditional Out-of-Distribution (OOD) detection in graph learning compresses all distributional anomalies into a single scalar uncertainty score. However, molecular graphs exhibit fundamentally decoupled failure modes:
@@ -38,61 +88,27 @@ Traditional Out-of-Distribution (OOD) detection in graph learning compresses all
 
 ---
 
-## 📦 Dataset Package (`processed_v3/`)
+## 📦 Dataset Quick Stats
 
-The primary dataset is pre-computed as PyTorch tensor graphs and standardized metadata tables:
-
-```
-processed_v3/
-├── graphs/                                # Pre-computed PyTorch tensor graph dictionaries
-│   ├── id_train.pt                        # 5,432 in-distribution training graphs
-│   ├── id_val.pt                          # 679 in-distribution validation graphs
-│   ├── id_test.pt                         # 679 in-distribution test graphs
-│   ├── novel_scaffold_val.pt              # 408 held-out scaffold validation graphs
-│   ├── novel_scaffold_test.pt             # 347 held-out scaffold test graphs
-│   ├── novel_dataset_val.pt               # 225 SIDER dataset shift validation graphs
-│   ├── novel_dataset_test.pt              # 198 SIDER dataset shift test graphs
-│   ├── corrupt_train.pt                   # 1,086 corrupted training graphs (Families A, B)
-│   ├── corrupt_val.pt                     # 543 corrupted validation graphs (Families A, B)
-│   └── corrupt_test.pt                    # 543 corrupted test graphs (Families A, B, and C)
-├── tables/
-│   ├── master_table.csv                   # Master table (10,140 rows) with SMILES, splits, and 12 Tox21 labels
-│   ├── eligible_pairs.csv                 # Corrupted graph -> valid twin graph mapping (same split)
-│   ├── matched_controls.csv               # Novelty target -> size-matched ID control mapping
-│   └── dropped_rows.csv                   # Curation log of filtered molecules
-├── splits/
-│   └── split_ids.json                     # JSON mapping of split names to graph UIDs
-├── audits/
-│   └── audit_results.json                 # Quantitative build audit metrics and shortcut baselines
-├── feature_schema.json                    # Feature definitions (30 atom features, 6 bond features)
-├── DATA_CARD.md                           # Comprehensive dataset documentation & evaluation rules
-├── BUILD_REPORT.md                        # Verification and build statistics
-└── config.json                            # Build configuration, seeds, and SHA-256 hashes
-```
-
----
-
-## 📑 Independent Audit Reports & Notebooks
-
-All audit artifacts have been independently generated, reproduced directly from the saved disk tensors, and validated:
-
-1. **[`dataset_integrity_report.md`](dataset_integrity_report.md):**  
-   Independent verification of all 10,140 graphs, tensor dimensions ($[N, 30]$ nodes, $[2, E]$ edges, $[E, 6]$ attributes, $[1, 12]$ labels), zero non-finite values, label missingness distributions, twin relationship consistency, and zero SMILES/scaffold leakage.
-
-2. **[`shortcut_audit.ipynb`](shortcut_audit.ipynb):**  
-   Fully executable, pre-rendered Jupyter Notebook independently reproducing count-only AUROC baselines (Random Forest & Logistic Regression) across validity and novelty axes, comparing against Member 2's reported results, and illustrating size-matching effects.
-
-3. **[`corruption_validation_report.md`](corruption_validation_report.md):**  
-   Detailed evaluation of synthetic valence corruptions: Family A (bond inflation), Family B (bond relocation), and Family C (held-out atom swap). Quantifies edit distributions ($1-3$ edits), valence violation counts, and pair deltas.
-
-4. **[`novelty_analysis.md`](novelty_analysis.md):**  
-   Detailed analysis of scaffold novelty vs. dataset shift. Validates the caliper matching protocol in `matched_controls.csv` (zero violations across 1,178 pairs), characterizes unmatched graphs, and separates pure size confounding from true chemical heteroatom differences.
+| Split | Category | Graphs |
+|:---|:---|---:|
+| `id_train` | In-Distribution (Tox21) | 5,432 |
+| `id_val` | In-Distribution (Tox21) | 679 |
+| `id_test` | In-Distribution (Tox21) | 679 |
+| `novel_scaffold_val` | Semantic Novelty — Scaffold | 408 |
+| `novel_scaffold_test` | Semantic Novelty — Scaffold | 347 |
+| `novel_dataset_val` | Semantic Novelty — Dataset Shift (SIDER) | 225 |
+| `novel_dataset_test` | Semantic Novelty — Dataset Shift (SIDER) | 198 |
+| `corrupt_train` | Syntactic Corruption (Fam. A & B) | 1,086 |
+| `corrupt_val` | Syntactic Corruption (Fam. A & B) | 543 |
+| `corrupt_test` | Syntactic Corruption (Fam. A, B & C) | 543 |
+| **Total** | | **10,140** |
 
 ---
 
 ## ⚡ Loading the Dataset in Python
 
-Graphs are stored as list of dictionaries readable with `torch.load`:
+Graphs are stored as lists of dictionaries, readable with `torch.load`:
 
 ```python
 import torch
@@ -101,22 +117,36 @@ import torch
 train_graphs = torch.load("processed_v3/graphs/id_train.pt", weights_only=True)
 sample = train_graphs[0]
 
-print("UID:", sample["uid"])                    # e.g., 'T21-00000'
-print("Node features (x):", sample["x"].shape)  # [N, 30]
-print("Edge index:", sample["edge_index"].shape)# [2, E] (bidirectional)
+print("UID:",           sample["uid"])            # e.g., 'T21-00000'
+print("Node features:", sample["x"].shape)        # [N, 30]
+print("Edge index:",    sample["edge_index"].shape)# [2, E] (bidirectional)
 print("Edge features:", sample["edge_attr"].shape) # [E, 6]
-print("Labels (y):", sample["y"].shape)          # [1, 12] (NaN for unlabeled tasks)
+print("Labels (y):",    sample["y"].shape)         # [1, 12] (NaN for unlabeled tasks)
 ```
+
+---
+
+## 📑 Audit Deliverables
+
+All audit artifacts are located in [`audits/`](audits/), independently generated directly from the saved disk tensors:
+
+| File | Description |
+|:---|:---|
+| [`audits/dataset_integrity_report.md`](audits/dataset_integrity_report.md) | Graph counts, tensor shapes, non-finite values, twin mapping, SMILES/scaffold leakage |
+| [`audits/corruption_validation_report.md`](audits/corruption_validation_report.md) | Family A/B/C corruption verification: edit counts, valence violations, pair deltas |
+| [`audits/novelty_analysis.md`](audits/novelty_analysis.md) | Scaffold vs. dataset novelty analysis; caliper matching protocol validation |
+| [`audits/notebooks/shortcut_audit.ipynb`](audits/notebooks/shortcut_audit.ipynb) | Executable shortcut AUROC reproduction (RF + LR count-only baselines) |
 
 ---
 
 ## 🔬 Benchmark Recommendations for Evaluators
 
-1. **Validity Axis:** Always report AUROC per corruption family (**Family A**, **Family B**, **Family C**) rather than aggregating them into a single score. Family A is the true gold standard for valence reasoning because summary count models achieve chance performance ($\approx 0.50$).
-2. **Novelty Axis:** Always evaluate novelty AUROCs against **`tables/matched_controls.csv`**. Size matching eliminates gross size artifacts (dropping AUROC by $7-10$ points) so that model scores reflect representation learning of novel chemotypes rather than simple atom counting.
+1. **Validity Axis:** Always report AUROC per corruption family (**Family A**, **Family B**, **Family C**) rather than aggregating them into a single score. Family A is the gold standard for valence reasoning because summary count models achieve chance performance (~0.50).
+2. **Novelty Axis:** Always evaluate novelty AUROCs against **`processed_v3/tables/matched_controls.csv`**. Size matching eliminates gross size artifacts (dropping AUROC by 7–10 points) so that model scores reflect representation learning of novel chemotypes rather than simple atom counting.
 3. **Count-Only Baseline:** Publications should always report a count-only tabular baseline (e.g., Random Forest on vertex/element histograms) alongside GNN architectures.
 
 ---
 
 ## 📄 License
+
 This project is licensed under the [MIT License](LICENSE).
