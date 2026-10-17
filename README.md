@@ -1,166 +1,120 @@
-# Dual-Axis Out-of-Distribution (OOD) Detection on Molecular Graphs
+# Dual-Axis Molecule Dataset (Version 3)
+### Disentangling Structural Validity from Semantic Novelty in Graph OOD Detection
 
-[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
-[![RDKit](https://img.shields.io/badge/RDKit-2024.03+-green.svg)](https://www.rdkit.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Code Style: Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-
-A benchmark and data-centric framework for evaluating **Graph Neural Networks (GNNs)** under **Dual-Axis Out-of-Distribution (OOD)** shifts. This repository formalizes OOD detection into two orthogonal chemical axes: **Structural / Syntactic Validity** (physical valency violations) and **Semantic / Scaffold Novelty** (domain shift into unseen chemical chemotypes).
+[![Dataset Status](https://img.shields.io/badge/Dataset%20Build-PASSED-brightgreen.svg)](processed_v3/BUILD_REPORT.md)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Python 3.13+](https://img.shields.io/badge/python-3.13%2B-blue.svg)](https://www.python.org/downloads/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.11%2B-ee4c2c.svg)](https://pytorch.org/)
 
 ---
 
-## 📌 The Dual-Axis Formulation
+## 🎯 Conceptual Framework
 
-Traditional OOD detection in machine learning collapses all distributional anomalies into a single scalar score. In molecular chemistry, however, failure modes are multifaceted:
+Traditional Out-of-Distribution (OOD) detection in graph learning compresses all distributional anomalies into a single scalar uncertainty score. However, molecular graphs exhibit fundamentally decoupled failure modes:
 
 ```
                           AXIS 1: Structural Validity
-                          (Syntactic / Chemical Rules)
+                          (Syntactic / Chemical Valence Rules)
                                    ▲
                                    │
               Chemically Invalid   │   Invalid Novel Graphs
-              (Corrupted Graphs)   │   (e.g., Texas Carbons)
+              (Corrupted Graphs)   │   (e.g., Hypervalent Edits)
                                    │
       ─────────────────────────────┼─────────────────────────────►
           In-Distribution (ID)     │   AXIS 2: Semantic Novelty
-          (Known Scaffolds)        │   (New Scaffolds / Chemotypes)
+          (Known Scaffolds)        │   (Held-Out Scaffolds & Datasets)
                                    │
                                    ▼
 ```
 
-- **Axis 1 — Structural Validity (Syntactic OOD):** Evaluates whether a molecular graph conforms to physical chemistry laws. Negative samples are chemically corrupted graphs containing **pentavalent "Texas" carbons** that strictly fail RDKit sanitization.
-- **Axis 2 — Semantic Novelty (Semantic OOD):** Evaluates model reliability when encountering valid chemical structures with entirely unseen core scaffolds (partitioned via **Bemis-Murcko scaffold splitting**).
+- **Axis 1 — Structural Validity (Syntactic OOD):** Evaluates whether a molecular graph conforms to physical valency rules. Tested using targeted synthetic valence corruptions:
+  - **Family A (Bond Inflation):** Inflates non-aromatic single/double bond orders. Perfectly count-invariant (clean validity test).
+  - **Family B (Bond Relocation):** Moves one end of a bond to a saturated atom (degree shift).
+  - **Family C (Atom Swap — Held Out):** Swaps carbon atoms for oxygen atoms (evaluated in test only).
+- **Axis 2 — Semantic Novelty (Semantic OOD):** Evaluates model generalization on chemically valid molecules with unseen topological features:
+  - **Scaffold Novelty (`novel_scaffold`):** Tox21 molecules with Bemis-Murcko cyclic frameworks completely held-out from training.
+  - **Dataset Shift Novelty (`novel_dataset`):** Approved and clinical drug molecules from SIDER, de-overlapped against Tox21.
+  - **Size-Matched Controls (`matched_controls.csv`):** Caliper-matched ID controls ($|\Delta \text{atoms}| \le 2, |\Delta \text{bonds}| \le 2$) to eliminate size confounding.
 
 ---
 
-## 🔬 Dataset Overview (Tox21)
+## 📦 Dataset Package (`processed_v3/`)
 
-We build upon the **Tox21** (Toxicology in the 21st Century) bioactivity benchmark:
-- **Raw Count:** 7,831 compounds across 12 toxicological bioassay targets.
-- **Preprocessing:** Validated and sanitized using RDKit; 8 unparseable inorganic compounds (e.g., aluminum hydrides) were removed.
-- **Curated Dataset:** **7,823 clean molecules**.
-
-### Scaffold-Based Splitting (70 / 10 / 10 / 10)
-To prevent **analog bias** (where identical ring systems leak between train and test sets), molecules were clustered by their **Bemis-Murcko Scaffold**:
-
-| Split | Molecules | Role | Description |
-|---|---|---|---|
-| `id_train` | 5,476 (~70%) | In-Distribution Train | Primary training partition for GNN representations |
-| `id_val` | 782 (~10%) | In-Distribution Validation | Hyperparameter optimization & threshold tuning |
-| `id_test` | 783 (~10%) | In-Distribution Test | Generalization baseline on known scaffolds |
-| `ood_valid` | 782 (~10%) | **Axis 2: Semantic OOD** | 100% disjoint scaffold cores never seen during training |
-
----
-
-## ⚡ Controlled Graph Corruption (Axis 1)
-
-To create negative samples for structural validity, we developed `add_bond_overvalent_carbon_v3`:
-1. Identifies candidate pairs of neutral, non-aromatic aliphatic carbon atoms ($sp^3, sp^2$) that do not share a bond.
-2. Inserts an explicit single bond between them, driving at least one carbon's total valence to **5** (exceeding carbon's physical limit of 4).
-3. Explicit hydrogens are frozen (`explicit_hs`, `no_implicit = True`) to prevent automatic RDKit hydrogen adjustment.
-4. **Validation:** Reconstructed from JSON and validated via `Chem.SanitizeMol()`. **100% of generated invalid graphs fail sanitization.**
-
-Because standard SMILES cannot represent invalid molecules without throwing errors, corrupted graphs are serialized as raw node/edge JSON topologies ready for PyTorch Geometric / DGL ingestion.
-
----
-
-## 📊 Exploratory Data Analysis (EDA) & Validation
-
-All exploratory data analysis and validation routines are reproducible via `eda/eda_analysis.py` and `eda/EDA_Dual_Axis_OOD.ipynb`.
-
-### Key Validation Findings
-
-1. **Zero Data Leakage (11/11 Checks Passed):**
-   - 0 SMILES overlap between all split pairs.
-   - 0 scaffold hash overlap between ID sets and `ood_valid`.
-   - Strict 1-to-1 provenance mapping for corrupted graphs.
-
-2. **No Shortcut Exploitation (Hypothesis Testing):**
-   - We evaluated whether OOD detection could be solved by trivial size baselines (e.g., counting atoms or molecular weight).
-   - **Mann-Whitney U tests** and **Cohen's $d$ effect sizes** across 6 physicochemical descriptors confirm that all differences are negligible (**Cohen's $d < 0.11$**). TPSA shows no significant difference ($p = 0.793$).
-
-3. **Chemical Balance:**
-   - Elemental frequencies (C: ~74%, O: ~14%, N: ~8%) and bond types remain consistent across ID and OOD splits.
-
----
-
-## 📁 Repository Structure
+The primary dataset is pre-computed as PyTorch tensor graphs and standardized metadata tables:
 
 ```
-Dual-Axis OOD Detection/
-├── Dataset/                               # Cleaned splits and corrupted graph JSONs
-│   ├── manifest.json                      # Checksums, record counts, and metadata
-│   ├── id_train_clean.csv                 # 5,476 ID training molecules
-│   ├── id_val_clean.csv                   # 782 ID validation molecules
-│   ├── id_test_clean.csv                  # 783 ID test molecules
-│   ├── ood_valid_clean.csv                # 782 Axis 2 Semantic OOD molecules
-│   ├── id_train_corrupted_v3_graphs.json  # Axis 1 invalid graphs (Train pool)
-│   ├── id_val_corrupted_v3_graphs.json    # Axis 1 invalid graphs (Val pool)
-│   ├── id_test_corrupted_v3_graphs.json   # Axis 1 invalid graphs (Test pool)
-│   └── ...                                # Pilot audits and validation records
-├── eda/                                   # Data quality & validation suite
-│   ├── plots/                             # 10 publication-ready figures
-│   │   ├── 01_molecule_sizes.png
-│   │   ├── 02_atom_type_distribution.png
-│   │   ├── 03_bond_type_distribution.png
-│   │   ├── 04_scaffold_distribution.png
-│   │   ├── 05_corruption_rates.png
-│   │   ├── 06_shortcut_analysis.png
-│   │   ├── 07_leakage_audit.png
-│   │   ├── 08_label_distribution.png
-│   │   ├── 09_valid_vs_invalid_size.png
-│   │   └── 10_overvalent_distribution.png
-│   ├── EDA_Dual_Axis_OOD.ipynb            # Interactive 12-section EDA notebook
-│   ├── eda_analysis.py                    # Standalone reproducible CLI script
-│   ├── leakage_audit.csv                  # 11-point leakage audit table
-│   ├── shortcut_analysis.csv              # Statistical tests & Cohen's d table
-│   ├── descriptive_statistics.csv         # Molecular properties summary
-│   ├── evaluation_metrics.json            # Standardized evaluation protocol
-│   └── data_quality_report.md             # Formal Data Quality Lead report
-├── data_preparation.ipynb                 # Original dataset curation notebook
-├── summary_till_eda.md                    # Complete project briefing & viva prep guide
-├── requirements.txt                       # Python dependencies
-├── LICENSE                                # MIT License
-└── README.md                              # Repository documentation
+processed_v3/
+├── graphs/                                # Pre-computed PyTorch tensor graph dictionaries
+│   ├── id_train.pt                        # 5,432 in-distribution training graphs
+│   ├── id_val.pt                          # 679 in-distribution validation graphs
+│   ├── id_test.pt                         # 679 in-distribution test graphs
+│   ├── novel_scaffold_val.pt              # 408 held-out scaffold validation graphs
+│   ├── novel_scaffold_test.pt             # 347 held-out scaffold test graphs
+│   ├── novel_dataset_val.pt               # 225 SIDER dataset shift validation graphs
+│   ├── novel_dataset_test.pt              # 198 SIDER dataset shift test graphs
+│   ├── corrupt_train.pt                   # 1,086 corrupted training graphs (Families A, B)
+│   ├── corrupt_val.pt                     # 543 corrupted validation graphs (Families A, B)
+│   └── corrupt_test.pt                    # 543 corrupted test graphs (Families A, B, and C)
+├── tables/
+│   ├── master_table.csv                   # Master table (10,140 rows) with SMILES, splits, and 12 Tox21 labels
+│   ├── eligible_pairs.csv                 # Corrupted graph -> valid twin graph mapping (same split)
+│   ├── matched_controls.csv               # Novelty target -> size-matched ID control mapping
+│   └── dropped_rows.csv                   # Curation log of filtered molecules
+├── splits/
+│   └── split_ids.json                     # JSON mapping of split names to graph UIDs
+├── audits/
+│   └── audit_results.json                 # Quantitative build audit metrics and shortcut baselines
+├── feature_schema.json                    # Feature definitions (30 atom features, 6 bond features)
+├── DATA_CARD.md                           # Comprehensive dataset documentation & evaluation rules
+├── BUILD_REPORT.md                        # Verification and build statistics
+└── config.json                            # Build configuration, seeds, and SHA-256 hashes
 ```
 
 ---
 
-## 🚀 Quick Start
+## 📑 Independent Audit Reports & Notebooks
 
-### 1. Installation
-Clone the repository and install dependencies:
-```bash
-git clone https://github.com/Amrendra21/Dual-Axis-OOD-Detection.git
-cd Dual-Axis-OOD-Detection
-pip install -r requirements.txt
-```
+All audit artifacts have been independently generated, reproduced directly from the saved disk tensors, and validated:
 
-### 2. Run EDA & Verification Suite
-To reproduce all statistical tests, audits, and regenerate all figures:
-```bash
-python eda/eda_analysis.py
-```
+1. **[`dataset_integrity_report.md`](dataset_integrity_report.md):**  
+   Independent verification of all 10,140 graphs, tensor dimensions ($[N, 30]$ nodes, $[2, E]$ edges, $[E, 6]$ attributes, $[1, 12]$ labels), zero non-finite values, label missingness distributions, twin relationship consistency, and zero SMILES/scaffold leakage.
 
-### 3. Open Interactive Notebooks
-```bash
-jupyter lab
-```
-- Open `eda/EDA_Dual_Axis_OOD.ipynb` to inspect interactive visualizations.
-- Open `data_preparation.ipynb` to view the original scaffold splitting and corruption logic.
+2. **[`shortcut_audit.ipynb`](shortcut_audit.ipynb):**  
+   Fully executable, pre-rendered Jupyter Notebook independently reproducing count-only AUROC baselines (Random Forest & Logistic Regression) across validity and novelty axes, comparing against Member 2's reported results, and illustrating size-matching effects.
+
+3. **[`corruption_validation_report.md`](corruption_validation_report.md):**  
+   Detailed evaluation of synthetic valence corruptions: Family A (bond inflation), Family B (bond relocation), and Family C (held-out atom swap). Quantifies edit distributions ($1-3$ edits), valence violation counts, and pair deltas.
+
+4. **[`novelty_analysis.md`](novelty_analysis.md):**  
+   Detailed analysis of scaffold novelty vs. dataset shift. Validates the caliper matching protocol in `matched_controls.csv` (zero violations across 1,178 pairs), characterizes unmatched graphs, and separates pure size confounding from true chemical heteroatom differences.
 
 ---
 
-## 📈 Standardized Evaluation Protocol
+## ⚡ Loading the Dataset in Python
 
-Models evaluated on this benchmark should report the following metrics across both axes:
+Graphs are stored as list of dictionaries readable with `torch.load`:
 
-| Metric | Full Name | Purpose |
-|---|---|---|
-| **AUROC** | Area Under ROC Curve | Threshold-independent discrimination capacity |
-| **AUPR-In** | Area Under Precision-Recall (ID as positive) | Performance under prevalence imbalance |
-| **AUPR-Out** | Area Under Precision-Recall (OOD as positive) | Anomaly detection effectiveness |
-| **FPR@95%TPR** | False Positive Rate at 95% True Positive Rate | Industry safety standard: false alarms at 95% detection |
+```python
+import torch
+
+# Load in-distribution training set
+train_graphs = torch.load("processed_v3/graphs/id_train.pt", weights_only=True)
+sample = train_graphs[0]
+
+print("UID:", sample["uid"])                    # e.g., 'T21-00000'
+print("Node features (x):", sample["x"].shape)  # [N, 30]
+print("Edge index:", sample["edge_index"].shape)# [2, E] (bidirectional)
+print("Edge features:", sample["edge_attr"].shape) # [E, 6]
+print("Labels (y):", sample["y"].shape)          # [1, 12] (NaN for unlabeled tasks)
+```
+
+---
+
+## 🔬 Benchmark Recommendations for Evaluators
+
+1. **Validity Axis:** Always report AUROC per corruption family (**Family A**, **Family B**, **Family C**) rather than aggregating them into a single score. Family A is the true gold standard for valence reasoning because summary count models achieve chance performance ($\approx 0.50$).
+2. **Novelty Axis:** Always evaluate novelty AUROCs against **`tables/matched_controls.csv`**. Size matching eliminates gross size artifacts (dropping AUROC by $7-10$ points) so that model scores reflect representation learning of novel chemotypes rather than simple atom counting.
+3. **Count-Only Baseline:** Publications should always report a count-only tabular baseline (e.g., Random Forest on vertex/element histograms) alongside GNN architectures.
 
 ---
 
