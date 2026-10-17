@@ -1,0 +1,13 @@
+Setting,Comparison,N_pos,N_neg,AUROC_1,AUROC_2,Delta_AUROC,Delta_95_CI,P_value,Significant (p<0.05)
+Scaffold Raw,ECFP4 / Tanimoto vs GNN Mahalanobis,408,679,0.5534,0.4566,0.0968,"[+0.0508, +0.1421]",0.0000,YES
+Scaffold Raw,ECFP4 / Tanimoto vs Multi-Task Energy,408,679,0.5534,0.5653,-0.0119,"[-0.0611, +0.0361]",0.6610,NO
+Scaffold Raw,Multi-Task Energy vs GNN Mahalanobis,408,679,0.5653,0.4566,0.1087,"[+0.0582, +0.1556]",0.0000,YES
+Scaffold Matched,ECFP4 / Tanimoto vs GNN Mahalanobis,372,372,0.495,0.4783,0.0167,"[-0.0392, +0.0718]",0.5590,NO
+Scaffold Matched,ECFP4 / Tanimoto vs Multi-Task Energy,372,372,0.495,0.5044,-0.0094,"[-0.0714, +0.0539]",0.7820,NO
+Scaffold Matched,Multi-Task Energy vs GNN Mahalanobis,372,372,0.5044,0.4783,0.0261,"[-0.0342, +0.0867]",0.4000,NO
+Dataset Raw,ECFP4 / Tanimoto vs GNN Mahalanobis,225,679,0.4943,0.6074,-0.1131,"[-0.1676, -0.0592]",0.0000,YES
+Dataset Raw,ECFP4 / Tanimoto vs Multi-Task Energy,225,679,0.4943,0.5281,-0.0338,"[-0.0933, +0.0239]",0.2620,NO
+Dataset Raw,Multi-Task Energy vs GNN Mahalanobis,225,679,0.5281,0.6074,-0.0794,"[-0.1373, -0.0224]",0.0100,YES
+Dataset Matched,ECFP4 / Tanimoto vs GNN Mahalanobis,211,211,0.4652,0.5362,-0.071,"[-0.1375, +0.0024]",0.0560,NO
+Dataset Matched,ECFP4 / Tanimoto vs Multi-Task Energy,211,211,0.4652,0.5208,-0.0556,"[-0.1218, +0.0157]",0.1440,NO
+Dataset Matched,Multi-Task Energy vs GNN Mahalanobis,211,211,0.5208,0.5362,-0.0154,"[-0.0869, +0.0628]",0.7140,NO

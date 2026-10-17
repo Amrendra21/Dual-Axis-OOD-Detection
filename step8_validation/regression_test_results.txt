@@ -1,0 +1,203 @@
+================================================================================
+STEP 8 REGRESSION TEST SUITE EXECUTION RESULTS
+Date: October 17, 2026
+OS: Windows 10 / 11 (AMD64)
+Python: 3.10.0 (tags/v3.10.0:b494f59, Oct 4 2021, 19:00:18)
+PyTorch: 2.11.0+cpu | RDKit: 2026.09.1 | scikit-learn: 1.4.2
+================================================================================
+
+Total Test Suites: 6
+Passed: 6
+Failed: 0
+Overall Exit Code: 0
+
+--------------------------------------------------------------------------------
+1. tests/test_loader.py
+Command: python tests/test_loader.py
+Exit Code: 0
+Result: PASSED
+Output:
+============================================================
+RUNNING DATASET LOADER SMOKE TEST
+============================================================
+
+--- Test 1: Load single graph from id_train ---
+Dataset id_train size: 5432 graphs
+Graph 0 UID        : T21-00000
+Graph 0 x shape    : torch.Size([16, 30]) (dtype: torch.float32)
+Graph 0 edge_index : torch.Size([2, 34]) (dtype: torch.int64)
+Graph 0 edge_attr  : torch.Size([34, 6]) (dtype: torch.float32)
+Graph 0 y shape    : torch.Size([1, 12]) (dtype: torch.float32)
+PASSED: Single graph schema verified.
+
+--- Test 2: Batch loading via DataLoader ---
+Batch num_graphs   : 5
+Batch UIDs         : ['T21-00000', 'T21-00001', 'T21-00003', 'T21-00004', 'T21-00005']
+Batch x shape      : torch.Size([82, 30])
+Batch edge_index   : torch.Size([2, 164])
+Batch edge_attr    : torch.Size([164, 6])
+Batch y shape      : torch.Size([5, 12])
+Batch vector shape : torch.Size([82])
+Batch ptr vector   : [0, 16, 31, 51, 62, 82]
+PASSED: Batch collation and UID recovery verified.
+
+--- Test 3: Missing labels remain NaN ---
+NaN count in batch labels: 7 / 60
+Corrupted graphs labels NaN status: 100% NaN verified (48 NaNs)
+SIDER graphs labels NaN status: 100% NaN verified (48 NaNs)
+PASSED: Missing label semantics strictly preserved without zero-filling.
+
+--- Test 4: Verify loader on all 10 splits without leakage ---
+  Checked split id_train                 : 5432 graphs OK
+  Checked split id_val                   : 679 graphs OK
+  Checked split id_test                  : 679 graphs OK
+  Checked split novel_scaffold_val       : 408 graphs OK
+  Checked split novel_scaffold_test      : 347 graphs OK
+  Checked split novel_dataset_val        : 225 graphs OK
+  Checked split novel_dataset_test       : 198 graphs OK
+  Checked split corrupt_train            : 1086 graphs OK
+  Checked split corrupt_val              : 543 graphs OK
+  Checked split corrupt_test             : 543 graphs OK
+PASSED: All 10 splits loaded with exact expected counts.
+
+============================================================
+ALL SMOKE CHECKS PASSED SUCCESSFULLY (Exit Code 0)
+============================================================
+
+--------------------------------------------------------------------------------
+2. tests/test_model.py
+Command: python tests/test_model.py
+Exit Code: 0
+Result: PASSED
+Output:
+============================================================
+RUNNING GINE BACKBONE & LOSS UNIT TESTS
+============================================================
+
+--- Test 1: Masked Multi-Task BCE Loss ---
+  [Pass] Standard non-NaN targets match standard BCE.
+  [Pass] Partial NaNs correctly excluded and normalized by observed count.
+  [Pass] All-NaN batch handled safely with zero loss and valid backprop.
+
+--- Test 2: GINEToxicityModel Forward Pass & Embedding Extraction ---
+  [Pass] Forward logits shape: torch.Size([8, 12]), embeddings shape: torch.Size([8, 128])
+  [Pass] Verified 1-to-1 correspondence with graph UIDs: ['T21-00000', 'T21-00001', 'T21-00003']...
+
+--- Test 3: Reproducibility & Determinism ---
+  [Pass] Seed control ensures reproducible weight initialization.
+
+============================================================
+ALL GINE BACKBONE & LOSS TESTS PASSED SUCCESSFULLY (Exit Code 0)
+============================================================
+
+--------------------------------------------------------------------------------
+3. tests/test_validity.py
+Command: python tests/test_validity.py
+Exit Code: 0
+Result: PASSED
+Output:
+============================================================
+RUNNING GINE VALIDITY DETECTOR UNIT TESTS
+============================================================
+
+--- Test 1: ValidityDataset & Family C Holdout Protection ---
+  [Pass] ValidityDataset loaded 6518 training graphs (5,432 ID + 1,086 Corrupt).
+  [Pass] Strict holdout confirmed: Attempt to load test split raised ValueError: Attempted to initialize ValidityDataset with test split 'corrupt_test'. Test splits and Family C are strictly forbidden during model fitting and validation!
+
+--- Test 2: Detector Forward Pass, Finite Scores & UID Order ---
+  [Pass] Forward pass validated with finite scores: [0.999990701675415, 0.6665138006210327, 0.9995114803314209]...
+
+--- Test 3: Score Direction Verification ---
+  [Pass] Verified score convention: Higher score = corrupted / OOD.
+
+--- Test 4: Save & Load Checkpoint Consistency ---
+  [Pass] Checkpoint serialization and restoration verified.
+
+============================================================
+ALL GINE VALIDITY DETECTOR TESTS PASSED SUCCESSFULLY (Exit Code 0)
+============================================================
+
+--------------------------------------------------------------------------------
+4. tests/test_novelty.py
+Command: python tests/test_novelty.py
+Exit Code: 0
+Result: PASSED
+Output:
+============================================================
+RUNNING MAHALANOBIS NOVELTY ESTIMATOR UNIT TESTS
+============================================================
+
+--- Test 1: Strict Split Enforcement ---
+  [Pass] Attempting fit on 'id_val' raised ValueError as expected.
+  [Pass] Attempting fit on 'id_test' raised ValueError as expected.
+  [Pass] Attempting fit on 'novel_scaffold_val' raised ValueError as expected.
+  [Pass] Attempting fit on 'corrupt_train' raised ValueError as expected.
+  [Pass] Scoring before fitting raised RuntimeError as expected.
+
+--- Test 3: Fit Properties ---
+  [Pass] Estimator is_fitted=True after .fit()
+  [Pass] embed_dim set correctly: 32
+  [Pass] n_train set correctly: 200
+  [Pass] Shrinkage in [0, 1]: 1.000000
+  [Pass] Mean vector shape correct: (32,)
+  [Pass] Precision matrix is positive definite (min eigval=1.008e+00).
+
+--- Test 4: Score Properties ---
+  [Pass] Scores shape correct: (50,)
+  [Pass] Scores dtype is float32.
+  [Pass] All scores are finite.
+  [Pass] All scores are non-negative (valid Mahalanobis distances).
+  [Pass] Scoring with wrong embed_dim raised ValueError as expected.
+
+--- Test 6: Round-Trip Serialization ---
+  [Pass] Estimator saved to estimator.npz (size=1503 bytes)
+  [Pass] Loaded estimator is_fitted=True
+  [Pass] embed_dim preserved after round-trip: 64
+  [Pass] shrinkage preserved after round-trip: 1.000000
+  [Pass] Scores are bit-exact after save -> load round-trip.
+
+--- Test 2: Embedding Extraction (id_train, first 32 graphs) ---
+  [Pass] Embedding shape correct: (5432, 256)
+  [Pass] Embedding dtype correct: float32
+  [Pass] All id_train embeddings are finite.
+  [Pass] UID count matches: 5432
+  [Pass] UID order preserved: first UID = 'T21-00000'
+
+--- Test 5: Score Direction (Novel > ID) ---
+  [Pass] id_train mean score = 10.180  |  novel_scaffold_val mean score = 12.393
+  [Pass] Score direction verified: novel_scaffold_val (12.393) > id_train (10.180)
+  [Pass] novel_dataset_val mean score = 15.566
+
+============================================================
+ALL MAHALANOBIS NOVELTY ESTIMATOR TESTS PASSED (Exit Code 0)
+============================================================
+
+--------------------------------------------------------------------------------
+5. tests/test_integration.py
+Command: python tests/test_integration.py
+Exit Code: 0
+Result: PASSED
+Output:
+============================================================
+RUNNING STEP 5 INTEGRATION & EVALUATION TESTS
+============================================================
+
+[BLOCKED] Final test evaluation was called without authorization.
+To run final evaluation on test sets (including Family C), specify:
+    python -m src.run_final_eval --authorize_test_evaluation
+
+Ran 6 tests in 1.343s
+OK
+
+--------------------------------------------------------------------------------
+6. tests/test_step7_novelty.py
+Command: python tests/test_step7_novelty.py
+Exit Code: 0
+Result: PASSED
+Output:
+Ran 5 tests in 0.444s
+OK
+
+================================================================================
+Summary: 6 / 6 Test Suites PASSED with 0 Errors and 0 Failures.
+================================================================================

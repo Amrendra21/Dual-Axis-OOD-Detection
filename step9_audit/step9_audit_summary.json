@@ -1,0 +1,113 @@
+{
+  "checkpoint_check": {
+    "toxicity_gine": {
+      "exists": true,
+      "size_kb": 2143,
+      "path": "C:\\Users\\aryan\\OneDrive\\Documents\\PROJECTS\\OOD_Research\\Dual-Axis-OOD-Detection\\checkpoints\\toxicity_gine\\best_model.pt"
+    },
+    "validity_gine": {
+      "exists": true,
+      "size_kb": 2072,
+      "path": "C:\\Users\\aryan\\OneDrive\\Documents\\PROJECTS\\OOD_Research\\Dual-Axis-OOD-Detection\\checkpoints\\validity_gine\\best_validity_model.pt"
+    },
+    "novelty_mahal": {
+      "exists": true,
+      "size_kb": 479,
+      "path": "C:\\Users\\aryan\\OneDrive\\Documents\\PROJECTS\\OOD_Research\\Dual-Axis-OOD-Detection\\checkpoints\\novelty_mahal\\estimator.npz"
+    },
+    "load_status": "OK",
+    "tox_embed_dim": 256,
+    "val_embed_dim": 256,
+    "nov_embed_dim": 256
+  },
+  "val_metrics_comparison": {
+    "label": "validation",
+    "discrepancies": [],
+    "total_checked": 7
+  },
+  "test_metrics_comparison": {
+    "label": "test",
+    "discrepancies": [],
+    "total_checked": 8
+  },
+  "calibration": {
+    "ece": 0.021525383654085583,
+    "mean_id_score": 0.031242817640304565,
+    "mean_corrupt_score": 0.9286351203918457,
+    "separation": 0.8973923027515411,
+    "bin_details": [
+      {
+        "bin": "[0.0,0.1)",
+        "count": 648,
+        "avg_conf": 0.019206583499908447,
+        "avg_acc": 0.013888888888888888,
+        "gap": 0.005317694611019559
+      },
+      {
+        "bin": "[0.1,0.2)",
+        "count": 29,
+        "avg_conf": 0.13577589392662048,
+        "avg_acc": 0.10344827586206896,
+        "gap": 0.03232761806455152
+      },
+      {
+        "bin": "[0.2,0.3)",
+        "count": 13,
+        "avg_conf": 0.2424265742301941,
+        "avg_acc": 0.6153846153846154,
+        "gap": -0.3729580411544213
+      },
+      {
+        "bin": "[0.3,0.4)",
+        "count": 10,
+        "avg_conf": 0.3517867922782898,
+        "avg_acc": 0.5,
+        "gap": -0.1482132077217102
+      },
+      {
+        "bin": "[0.4,0.5)",
+        "count": 8,
+        "avg_conf": 0.44890010356903076,
+        "avg_acc": 0.875,
+        "gap": -0.42609989643096924
+      },
+      {
+        "bin": "[0.5,0.6)",
+        "count": 6,
+        "avg_conf": 0.526746928691864,
+        "avg_acc": 1.0,
+        "gap": -0.473253071308136
+      },
+      {
+        "bin": "[0.6,0.7)",
+        "count": 8,
+        "avg_conf": 0.6469408273696899,
+        "avg_acc": 1.0,
+        "gap": -0.35305917263031006
+      },
+      {
+        "bin": "[0.7,0.8)",
+        "count": 15,
+        "avg_conf": 0.7574278116226196,
+        "avg_acc": 0.8666666666666667,
+        "gap": -0.10923885504404707
+      },
+      {
+        "bin": "[0.8,0.9)",
+        "count": 18,
+        "avg_conf": 0.8592210412025452,
+        "avg_acc": 1.0,
+        "gap": -0.14077895879745483
+      },
+      {
+        "bin": "[0.9,1.0)",
+        "count": 467,
+        "avg_conf": 0.9928379654884338,
+        "avg_acc": 0.9978586723768736,
+        "gap": -0.005020706888439808
+      }
+    ]
+  },
+  "elapsed_seconds": 7.0,
+  "status": "COMPLETE"
+}

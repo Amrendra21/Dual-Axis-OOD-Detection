@@ -1,0 +1,5 @@
+Method / Model,Scaff Raw AUROC,Scaff Matched AUROC,Data Raw AUROC,Data Matched AUROC
+GNN Mahalanobis (Step 5 Frozen Baseline),0.4566,0.4783,0.6074,0.5362
+Multi-Task Free Energy Score (Step 6),0.5653,0.5044,0.5281,0.5208
+Latent Cosine kNN (k=20) (Step 6),0.4958,0.4838,0.4982,0.5577
+ECFP4 / Max Tanimoto Distance (Step 7),0.5534,0.4950,0.4943,0.4652
