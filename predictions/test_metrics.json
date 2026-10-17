@@ -1,0 +1,58 @@
+{
+  "validity_all_test": {
+    "auroc": 0.9958339774937144,
+    "aupr": 0.9964740225026276,
+    "fpr95": 0.0,
+    "n_neg": 679,
+    "n_pos": 543
+  },
+  "validity_family_a_test": {
+    "auroc": 0.9986004768142948,
+    "aupr": 0.9961328638835729,
+    "fpr95": 0.0,
+    "n_neg": 679,
+    "n_pos": 181
+  },
+  "validity_family_b_test": {
+    "auroc": 0.9920829298855157,
+    "aupr": 0.9884909700661751,
+    "fpr95": 0.0,
+    "n_neg": 679,
+    "n_pos": 181
+  },
+  "validity_family_c_test": {
+    "auroc": 0.9968185257813327,
+    "aupr": 0.9942324574526497,
+    "fpr95": 0.0,
+    "n_neg": 679,
+    "n_pos": 181
+  },
+  "novelty_scaffold_raw_test": {
+    "auroc": 0.5012881292628165,
+    "aupr": 0.3466880600120894,
+    "fpr95": 0.9278350515463918,
+    "n_neg": 679,
+    "n_pos": 347
+  },
+  "novelty_scaffold_matched_test": {
+    "auroc": 0.4535555789857087,
+    "aupr": 0.4873883475577656,
+    "fpr95": 0.9876160990712074,
+    "n_neg": 323,
+    "n_pos": 323
+  },
+  "novelty_dataset_raw_test": {
+    "auroc": 0.6659972330075422,
+    "aupr": 0.35904591435539956,
+    "fpr95": 0.8070692194403535,
+    "n_neg": 679,
+    "n_pos": 198
+  },
+  "novelty_dataset_matched_test": {
+    "auroc": 0.5729646258114329,
+    "aupr": 0.5726005159265848,
+    "fpr95": 0.9144385026737968,
+    "n_neg": 187,
+    "n_pos": 187
+  }
+}

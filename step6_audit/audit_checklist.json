@@ -1,0 +1,267 @@
+{
+  "checkpoint_audit": {
+    "toxicity_backbone_dim": 256,
+    "validity_detector_dim": 256,
+    "novelty_estimator_dim": 256,
+    "estimator_is_fitted": true,
+    "shrinkage": 0.0037787150443729677,
+    "status": "PASS"
+  },
+  "dataset_counts_audit": {
+    "total_graphs": 10140,
+    "unique_uids": 10140,
+    "split_counts": {
+      "id_train": 5432,
+      "corrupt_train": 1086,
+      "id_val": 679,
+      "id_test": 679,
+      "corrupt_val": 543,
+      "corrupt_test": 543,
+      "novel_scaffold_val": 408,
+      "novel_scaffold_test": 347,
+      "novel_dataset_val": 225,
+      "novel_dataset_test": 198
+    },
+    "duplicate_uids_count": 0,
+    "status": "PASS"
+  },
+  "molecular_leakage_audit": {
+    "cross_split_leakage_events": 0,
+    "total_unique_smiles": 10139,
+    "intra_split_duplicate_rows": 2,
+    "intra_split_duplicates_detail": [
+      {
+        "uid": "COR-B-T21-01050",
+        "set_name": "corrupt_train",
+        "smiles": "OClc1cccc(ClCl)c1"
+      },
+      {
+        "uid": "COR-B-T21-05066",
+        "set_name": "corrupt_train",
+        "smiles": "OClc1cccc(ClCl)c1"
+      }
+    ],
+    "status": "PASS"
+  },
+  "family_c_audit": {
+    "distribution_by_split": {
+      "corrupt_train": {
+        "A": 543,
+        "B": 543
+      },
+      "corrupt_val": {
+        "A": 272,
+        "B": 271
+      },
+      "corrupt_test": {
+        "A": 181,
+        "B": 181,
+        "C": 181
+      }
+    },
+    "family_c_in_training": false,
+    "family_c_in_validation": false,
+    "family_c_in_test": 181,
+    "status": "PASS"
+  },
+  "label_semantics_audit": {
+    "corrupted_labels_all_nan": true,
+    "sider_labels_all_nan": true,
+    "status": "PASS"
+  },
+  "recomputation_audit": {
+    "validation_metrics": {
+      "validity_all": {
+        "recomputed": {
+          "auroc": 0.9958963593411392,
+          "aupr": 0.9960768375397745,
+          "fpr95": 0.004418262150220913,
+          "n_neg": 679,
+          "n_pos": 543
+        },
+        "saved": {
+          "auroc": 0.9958963593411392,
+          "aupr": 0.9960768375397745,
+          "fpr95": 0.004418262150220913,
+          "n_neg": 679,
+          "n_pos": 543
+        },
+        "match": true
+      },
+      "validity_family_a": {
+        "recomputed": {
+          "auroc": 0.9965834271853071,
+          "aupr": 0.9932522656716586,
+          "fpr95": 0.010309278350515464,
+          "n_neg": 679,
+          "n_pos": 272
+        },
+        "saved": {
+          "auroc": 0.9965834271853071,
+          "aupr": 0.9932522656716586,
+          "fpr95": 0.010309278350515464,
+          "n_neg": 679,
+          "n_pos": 272
+        },
+        "match": true
+      },
+      "validity_family_b": {
+        "recomputed": {
+          "auroc": 0.9952067561912733,
+          "aupr": 0.9933822473769531,
+          "fpr95": 0.004418262150220913,
+          "n_neg": 679,
+          "n_pos": 271
+        },
+        "saved": {
+          "auroc": 0.9952067561912733,
+          "aupr": 0.9933822473769531,
+          "fpr95": 0.004418262150220913,
+          "n_neg": 679,
+          "n_pos": 271
+        },
+        "match": true
+      },
+      "novelty_scaffold_raw": {
+        "recomputed": {
+          "auroc": 0.45664038811400853,
+          "aupr": 0.3440325725097104,
+          "fpr95": 0.9631811487481591,
+          "n_neg": 679,
+          "n_pos": 408
+        },
+        "saved": {
+          "auroc": 0.45664038811400853,
+          "aupr": 0.3440325725097104,
+          "fpr95": 0.9631811487481591,
+          "n_neg": 679,
+          "n_pos": 408
+        },
+        "match": true
+      },
+      "novelty_dataset_raw": {
+        "recomputed": {
+          "auroc": 0.6074488627065946,
+          "aupr": 0.3347079343888456,
+          "fpr95": 0.9116347569955817,
+          "n_neg": 679,
+          "n_pos": 225
+        },
+        "saved": {
+          "auroc": 0.6074488627065946,
+          "aupr": 0.3347079343888456,
+          "fpr95": 0.9116347569955817,
+          "n_neg": 679,
+          "n_pos": 225
+        },
+        "match": true
+      }
+    },
+    "test_metrics": {
+      "validity_all_test": {
+        "recomputed": {
+          "auroc": 0.9958339774937144,
+          "aupr": 0.9964740225026276,
+          "fpr95": 0.0,
+          "n_neg": 679,
+          "n_pos": 543
+        },
+        "saved": {
+          "auroc": 0.9958339774937144,
+          "aupr": 0.9964740225026276,
+          "fpr95": 0.0,
+          "n_neg": 679,
+          "n_pos": 543
+        },
+        "match": true
+      },
+      "validity_family_a_test": {
+        "recomputed": {
+          "auroc": 0.9986004768142948,
+          "aupr": 0.9961328638835729,
+          "fpr95": 0.0,
+          "n_neg": 679,
+          "n_pos": 181
+        },
+        "saved": {
+          "auroc": 0.9986004768142948,
+          "aupr": 0.9961328638835729,
+          "fpr95": 0.0,
+          "n_neg": 679,
+          "n_pos": 181
+        },
+        "match": true
+      },
+      "validity_family_b_test": {
+        "recomputed": {
+          "auroc": 0.9920829298855157,
+          "aupr": 0.9884909700661751,
+          "fpr95": 0.0,
+          "n_neg": 679,
+          "n_pos": 181
+        },
+        "saved": {
+          "auroc": 0.9920829298855157,
+          "aupr": 0.9884909700661751,
+          "fpr95": 0.0,
+          "n_neg": 679,
+          "n_pos": 181
+        },
+        "match": true
+      },
+      "validity_family_c_test": {
+        "recomputed": {
+          "auroc": 0.9968185257813327,
+          "aupr": 0.9942324574526497,
+          "fpr95": 0.0,
+          "n_neg": 679,
+          "n_pos": 181
+        },
+        "saved": {
+          "auroc": 0.9968185257813327,
+          "aupr": 0.9942324574526497,
+          "fpr95": 0.0,
+          "n_neg": 679,
+          "n_pos": 181
+        },
+        "match": true
+      },
+      "novelty_scaffold_raw_test": {
+        "recomputed": {
+          "auroc": 0.5012881292628165,
+          "aupr": 0.3466880600120894,
+          "fpr95": 0.9278350515463918,
+          "n_neg": 679,
+          "n_pos": 347
+        },
+        "saved": {
+          "auroc": 0.5012881292628165,
+          "aupr": 0.3466880600120894,
+          "fpr95": 0.9278350515463918,
+          "n_neg": 679,
+          "n_pos": 347
+        },
+        "match": true
+      },
+      "novelty_dataset_raw_test": {
+        "recomputed": {
+          "auroc": 0.6659972330075422,
+          "aupr": 0.35904591435539956,
+          "fpr95": 0.8070692194403535,
+          "n_neg": 679,
+          "n_pos": 198
+        },
+        "saved": {
+          "auroc": 0.6659972330075422,
+          "aupr": 0.35904591435539956,
+          "fpr95": 0.8070692194403535,
+          "n_neg": 679,
+          "n_pos": 198
+        },
+        "match": true
+      }
+    },
+    "validation_status": "PASS",
+    "test_status": "PASS"
+  }
+}

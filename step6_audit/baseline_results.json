@@ -1,0 +1,127 @@
+{
+  "validity_baselines": [
+    {
+      "model": "Atom Count (N)",
+      "all_auroc": 0.5201113651589245,
+      "all_fpr95": 0.9513991163475699,
+      "fam_a_auroc": 0.5114327947673916,
+      "fam_a_fpr95": 0.9808541973490427,
+      "fam_b_auroc": 0.5288219597954448,
+      "fam_b_fpr95": 0.9248895434462445
+    },
+    {
+      "model": "Bond Count (E)",
+      "all_auroc": 0.5195051763372092,
+      "all_fpr95": 0.9543446244477173,
+      "fam_a_auroc": 0.5101414277051026,
+      "fam_a_fpr95": 0.9823269513991163,
+      "fam_b_auroc": 0.5289034775472938,
+      "fam_b_fpr95": 0.9263622974963182
+    },
+    {
+      "model": "Graph Size (N + E)",
+      "all_auroc": 0.5197913191590926,
+      "all_fpr95": 0.9513991163475699,
+      "fam_a_auroc": 0.5108047084813306,
+      "fam_a_fpr95": 0.9808541973490427,
+      "fam_b_auroc": 0.5288110907618648,
+      "fam_b_fpr95": 0.9248895434462445
+    },
+    {
+      "model": "Logistic Regression (32 Counts)",
+      "all_auroc": 0.6166215076336395,
+      "all_fpr95": 0.9219440353460973,
+      "fam_a_auroc": 0.520794529151867,
+      "fam_a_fpr95": 0.9484536082474226,
+      "fam_b_auroc": 0.7128020912020607,
+      "fam_b_fpr95": 0.8512518409425626
+    },
+    {
+      "model": "Random Forest (32 Counts)",
+      "all_auroc": 0.640043179087435,
+      "all_fpr95": 0.8541973490427098,
+      "fam_a_auroc": 0.5644302824222472,
+      "fam_a_fpr95": 0.9248895434462445,
+      "fam_b_auroc": 0.7159350901314611,
+      "fam_b_fpr95": 0.8203240058910162
+    },
+    {
+      "model": "GINE Validity Detector (Ours)",
+      "all_auroc": 0.9958963593411392,
+      "all_fpr95": 0.004418262150220913,
+      "fam_a_auroc": 0.9965834271853071,
+      "fam_a_fpr95": 0.010309278350515464,
+      "fam_b_auroc": 0.9952067561912733,
+      "fam_b_fpr95": 0.004418262150220913
+    }
+  ],
+  "novelty_baselines": [
+    {
+      "model": "Atom Count (N)",
+      "scaff_raw_auroc": 0.5039887088856161,
+      "scaff_raw_fpr95": 0.8512518409425626,
+      "scaff_matched_auroc": 0.5034360908775581,
+      "scaff_matched_fpr95": 0.9435483870967742,
+      "dataset_raw_auroc": 0.6264572083128784,
+      "dataset_raw_fpr95": 0.8954344624447718,
+      "dataset_matched_auroc": 0.5023247456256598,
+      "dataset_matched_fpr95": 0.957345971563981
+    },
+    {
+      "model": "Bond Count (E)",
+      "scaff_raw_auroc": 0.5044489445262641,
+      "scaff_raw_fpr95": 0.8306332842415317,
+      "scaff_matched_auroc": 0.4935252630361891,
+      "scaff_matched_fpr95": 0.956989247311828,
+      "dataset_raw_auroc": 0.6206447389952546,
+      "dataset_raw_fpr95": 0.8777614138438881,
+      "dataset_matched_auroc": 0.4983154017205364,
+      "dataset_matched_fpr95": 0.957345971563981
+    },
+    {
+      "model": "Graph Size (N + E)",
+      "scaff_raw_auroc": 0.5042504115048081,
+      "scaff_raw_fpr95": 0.8306332842415317,
+      "scaff_matched_auroc": 0.4983415712799168,
+      "scaff_matched_fpr95": 0.9435483870967742,
+      "dataset_raw_auroc": 0.6234069710358371,
+      "dataset_raw_fpr95": 0.8777614138438881,
+      "dataset_matched_auroc": 0.5001796904831428,
+      "dataset_matched_fpr95": 0.957345971563981
+    },
+    {
+      "model": "Mahalanobis on Counts (32d)",
+      "scaff_raw_auroc": 0.4495924658523203,
+      "scaff_raw_fpr95": 0.9528718703976435,
+      "scaff_matched_auroc": 0.48135261301884613,
+      "scaff_matched_fpr95": 0.967741935483871,
+      "dataset_raw_auroc": 0.62971363115693,
+      "dataset_raw_fpr95": 0.914580265095729,
+      "dataset_matched_auroc": 0.5543114485299072,
+      "dataset_matched_fpr95": 0.966824644549763
+    },
+    {
+      "model": "GNN Mahalanobis (Step 5 frozen)",
+      "scaff_raw_auroc": 0.45664038811400853,
+      "scaff_raw_fpr95": 0.9631811487481591,
+      "scaff_matched_auroc": 0.4782995143947277,
+      "scaff_matched_fpr95": 0.9865591397849462,
+      "dataset_raw_auroc": 0.6074488627065946,
+      "dataset_raw_fpr95": 0.9116347569955817,
+      "dataset_matched_auroc": 0.5361739403876822,
+      "dataset_matched_fpr95": 0.95260663507109
+    }
+  ],
+  "matching_coverage": {
+    "novel_scaffold_val": {
+      "total": 408,
+      "matched": 372,
+      "coverage_percent": 91.17647058823529
+    },
+    "novel_dataset_val": {
+      "total": 225,
+      "matched": 211,
+      "coverage_percent": 93.77777777777779
+    }
+  }
+}

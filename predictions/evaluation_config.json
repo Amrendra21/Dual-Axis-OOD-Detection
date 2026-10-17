@@ -1,0 +1,23 @@
+{
+  "step": 5,
+  "phase": "validation_evaluation",
+  "toxicity_checkpoint": "checkpoints/toxicity_gine/best_model.pt",
+  "validity_checkpoint": "checkpoints/validity_gine/best_validity_model.pt",
+  "novelty_estimator_path": "checkpoints/novelty_mahal/estimator.npz",
+  "embedding_dimension": 256,
+  "score_directions": {
+    "validity_score": "Higher means more corrupted / invalid (positive class = corrupted)",
+    "novelty_score": "Higher means more novel / farther from ID training manifold (positive class = novel)"
+  },
+  "score_bounds": {
+    "validity_score": "[0.0, 1.0] (Sigmoid probability output)",
+    "novelty_score": "[0.0, +inf) (Regularized Mahalanobis distance)"
+  },
+  "split_counts": {
+    "id_val": 679,
+    "corrupt_val": 543,
+    "novel_scaffold_val": 408,
+    "novel_dataset_val": 225
+  },
+  "test_protection_status": "Strictly frozen. No test split loaded or inspected during validation evaluation."
+}

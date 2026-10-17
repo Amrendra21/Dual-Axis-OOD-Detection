@@ -1,0 +1,343 @@
+[
+  {
+    "method": "1. Baseline Mahalanobis (256d)",
+    "scaff_raw_auroc": 0.45664038811400853,
+    "scaff_raw_ci": [
+      0.42311880643980015,
+      0.4933686466136414
+    ],
+    "scaff_raw_aupr": 0.3440325725097104,
+    "scaff_raw_fpr95": 0.9631811487481591,
+    "scaff_matched_auroc": 0.4782995143947277,
+    "scaff_matched_ci": [
+      0.43505481611738855,
+      0.5240666787700069
+    ],
+    "scaff_matched_aupr": 0.4955973661153488,
+    "scaff_matched_fpr95": 0.9865591397849462,
+    "dataset_raw_auroc": 0.6074488627065946,
+    "dataset_raw_ci": [
+      0.563430777629626,
+      0.6485467828678625
+    ],
+    "dataset_raw_aupr": 0.3347079343888456,
+    "dataset_raw_fpr95": 0.9116347569955817,
+    "dataset_matched_auroc": 0.5361739403876822,
+    "dataset_matched_ci": [
+      0.4841559738498122,
+      0.5954773078999883
+    ],
+    "dataset_matched_aupr": 0.5291110910160224,
+    "dataset_matched_fpr95": 0.95260663507109
+  },
+  {
+    "method": "2. Mean-Only Slice (128d) Mahalanobis",
+    "scaff_raw_auroc": 0.45033064772300674,
+    "scaff_raw_ci": [
+      0.41755729791721496,
+      0.4817299180255578
+    ],
+    "scaff_raw_aupr": 0.3396453917743788,
+    "scaff_raw_fpr95": 0.9396170839469808,
+    "scaff_matched_auroc": 0.47472973754191233,
+    "scaff_matched_ci": [
+      0.43481919278025494,
+      0.5185439666461457
+    ],
+    "scaff_matched_aupr": 0.4893478285474009,
+    "scaff_matched_fpr95": 0.9408602150537635,
+    "dataset_raw_auroc": 0.4495041728031419,
+    "dataset_raw_ci": [
+      0.4081483465346453,
+      0.4913471866615316
+    ],
+    "dataset_raw_aupr": 0.2253302906718465,
+    "dataset_raw_fpr95": 0.9396170839469808,
+    "dataset_matched_auroc": 0.5416095775027515,
+    "dataset_matched_ci": [
+      0.4835200968013469,
+      0.5980464557733525
+    ],
+    "dataset_matched_aupr": 0.5239321883210356,
+    "dataset_matched_fpr95": 0.9289099526066351
+  },
+  {
+    "method": "3. L2-Normalized (256d) Mahalanobis",
+    "scaff_raw_auroc": 0.44519044731294577,
+    "scaff_raw_ci": [
+      0.41366694493785744,
+      0.477588697091171
+    ],
+    "scaff_raw_aupr": 0.32960270873604275,
+    "scaff_raw_fpr95": 0.9484536082474226,
+    "scaff_matched_auroc": 0.46761186264308013,
+    "scaff_matched_ci": [
+      0.4251510592103857,
+      0.5120195277820423
+    ],
+    "scaff_matched_aupr": 0.4805650927886831,
+    "scaff_matched_fpr95": 0.956989247311828,
+    "dataset_raw_auroc": 0.44413025691376207,
+    "dataset_raw_ci": [
+      0.4027278089932895,
+      0.48440753506603385
+    ],
+    "dataset_raw_aupr": 0.21928676040783213,
+    "dataset_raw_fpr95": 0.9528718703976435,
+    "dataset_matched_auroc": 0.5258866602277577,
+    "dataset_matched_ci": [
+      0.4689539524825851,
+      0.5838865070437881
+    ],
+    "dataset_matched_aupr": 0.5124150747529527,
+    "dataset_matched_fpr95": 0.966824644549763
+  },
+  {
+    "method": "4. Size-Residualized Embedding Mahalanobis",
+    "scaff_raw_auroc": 0.4550954402379509,
+    "scaff_raw_ci": [
+      0.42104265219779496,
+      0.49198989186751807
+    ],
+    "scaff_raw_aupr": 0.34361774447994115,
+    "scaff_raw_fpr95": 0.96759941089838,
+    "scaff_matched_auroc": 0.47864637530350324,
+    "scaff_matched_ci": [
+      0.4348854924208583,
+      0.5243668433368909
+    ],
+    "scaff_matched_aupr": 0.49564531354340635,
+    "scaff_matched_fpr95": 0.9865591397849462,
+    "dataset_raw_auroc": 0.6061397479954181,
+    "dataset_raw_ci": [
+      0.5622590777252471,
+      0.6464246550990292
+    ],
+    "dataset_raw_aupr": 0.3329959889185277,
+    "dataset_raw_fpr95": 0.9131075110456554,
+    "dataset_matched_auroc": 0.5369600862514319,
+    "dataset_matched_ci": [
+      0.48479048481468207,
+      0.5962021940121549
+    ],
+    "dataset_matched_aupr": 0.5292266199416444,
+    "dataset_matched_fpr95": 0.95260663507109
+  },
+  {
+    "method": "5. Size-Residualized Distance",
+    "scaff_raw_auroc": 0.43878685494816483,
+    "scaff_raw_ci": [
+      0.40616366565041406,
+      0.47318007325418004
+    ],
+    "scaff_raw_aupr": 0.33719444005298893,
+    "scaff_raw_fpr95": 0.9587628865979382,
+    "scaff_matched_auroc": 0.45588362816510575,
+    "scaff_matched_ci": [
+      0.4132594073855219,
+      0.5005765676315646
+    ],
+    "scaff_matched_aupr": 0.4782473322593588,
+    "scaff_matched_fpr95": 0.967741935483871,
+    "dataset_raw_auroc": 0.5144428080510555,
+    "dataset_raw_ci": [
+      0.467749754801536,
+      0.5579369593730206
+    ],
+    "dataset_raw_aupr": 0.26395182897756797,
+    "dataset_raw_fpr95": 0.96759941089838,
+    "dataset_matched_auroc": 0.5472473664113564,
+    "dataset_matched_ci": [
+      0.4922255893842043,
+      0.6012564494737469
+    ],
+    "dataset_matched_aupr": 0.5248146231551958,
+    "dataset_matched_fpr95": 0.9715639810426541
+  },
+  {
+    "method": "6. Size-Stratified Mahalanobis (4 Bins)",
+    "scaff_raw_auroc": 0.45080351728320195,
+    "scaff_raw_ci": [
+      0.4186382749912545,
+      0.48601995996936614
+    ],
+    "scaff_raw_aupr": 0.3542321201439014,
+    "scaff_raw_fpr95": 0.96759941089838,
+    "scaff_matched_auroc": 0.4572855243380738,
+    "scaff_matched_ci": [
+      0.4157879966448547,
+      0.4987164414941841
+    ],
+    "scaff_matched_aupr": 0.4758931985398761,
+    "scaff_matched_fpr95": 0.9731182795698925,
+    "dataset_raw_auroc": 0.5399181803305515,
+    "dataset_raw_ci": [
+      0.49469526801396146,
+      0.5823542751241323
+    ],
+    "dataset_raw_aupr": 0.27334564127284133,
+    "dataset_raw_fpr95": 0.9425625920471281,
+    "dataset_matched_auroc": 0.535005952247254,
+    "dataset_matched_ci": [
+      0.48039594209868774,
+      0.5930813626126126
+    ],
+    "dataset_matched_aupr": 0.5180181724616063,
+    "dataset_matched_fpr95": 0.966824644549763
+  },
+  {
+    "method": "7. Latent Cosine kNN (k=5)",
+    "scaff_raw_auroc": 0.5255385659418407,
+    "scaff_raw_ci": [
+      0.49213461554421795,
+      0.5587352802937249
+    ],
+    "scaff_raw_aupr": 0.3743786212641961,
+    "scaff_raw_fpr95": 0.9204712812960235,
+    "scaff_matched_auroc": 0.4861111111111111,
+    "scaff_matched_ci": [
+      0.4441966415747817,
+      0.523949670254444
+    ],
+    "scaff_matched_aupr": 0.4772118656412634,
+    "scaff_matched_fpr95": 0.956989247311828,
+    "dataset_raw_auroc": 0.4794763541155293,
+    "dataset_raw_ci": [
+      0.43042711827931973,
+      0.5160045058926181
+    ],
+    "dataset_raw_aupr": 0.2342399998653522,
+    "dataset_raw_fpr95": 0.9779086892488954,
+    "dataset_matched_auroc": 0.5174187462096539,
+    "dataset_matched_ci": [
+      0.459873604608305,
+      0.5703580430119682
+    ],
+    "dataset_matched_aupr": 0.5066516463551145,
+    "dataset_matched_fpr95": 0.957345971563981
+  },
+  {
+    "method": "7. Latent Cosine kNN (k=10)",
+    "scaff_raw_auroc": 0.5115329637009443,
+    "scaff_raw_ci": [
+      0.47879133741742036,
+      0.5448843915453855
+    ],
+    "scaff_raw_aupr": 0.3634539459159134,
+    "scaff_raw_fpr95": 0.9204712812960235,
+    "scaff_matched_auroc": 0.48640738813735696,
+    "scaff_matched_ci": [
+      0.44542782294489613,
+      0.5243592696339241
+    ],
+    "scaff_matched_aupr": 0.478241146051667,
+    "scaff_matched_fpr95": 0.956989247311828,
+    "dataset_raw_auroc": 0.4936213385697922,
+    "dataset_raw_ci": [
+      0.45000714283706594,
+      0.5314798069658436
+    ],
+    "dataset_raw_aupr": 0.23746784138093782,
+    "dataset_raw_fpr95": 0.9661266568483063,
+    "dataset_matched_auroc": 0.543024640057501,
+    "dataset_matched_ci": [
+      0.4875498656704069,
+      0.5966620018267089
+    ],
+    "dataset_matched_aupr": 0.5239855888597673,
+    "dataset_matched_fpr95": 0.9146919431279621
+  },
+  {
+    "method": "7. Latent Cosine kNN (k=20)",
+    "scaff_raw_auroc": 0.4957838805625343,
+    "scaff_raw_ci": [
+      0.4608089691506325,
+      0.5302852950032824
+    ],
+    "scaff_raw_aupr": 0.3527777060460596,
+    "scaff_raw_fpr95": 0.9219440353460973,
+    "scaff_matched_auroc": 0.4838348363972714,
+    "scaff_matched_ci": [
+      0.443763154000079,
+      0.5255007634557641
+    ],
+    "scaff_matched_aupr": 0.47767404689297216,
+    "scaff_matched_fpr95": 0.946236559139785,
+    "dataset_raw_auroc": 0.49823596792668956,
+    "dataset_raw_ci": [
+      0.4562752453632098,
+      0.5335660983112264
+    ],
+    "dataset_raw_aupr": 0.23892383329348932,
+    "dataset_raw_fpr95": 0.9528718703976435,
+    "dataset_matched_auroc": 0.5577367983648166,
+    "dataset_matched_ci": [
+      0.5003895206313431,
+      0.6114128988218847
+    ],
+    "dataset_matched_aupr": 0.5370477978780693,
+    "dataset_matched_fpr95": 0.8909952606635071
+  },
+  {
+    "method": "8. Multi-Task Free Energy Score",
+    "scaff_raw_auroc": 0.5653390222068209,
+    "scaff_raw_ci": [
+      0.5329687687647882,
+      0.5981869828806688
+    ],
+    "scaff_raw_aupr": 0.4239238909028921,
+    "scaff_raw_fpr95": 0.8586156111929307,
+    "scaff_matched_auroc": 0.5043574401664932,
+    "scaff_matched_ci": [
+      0.45926820263429546,
+      0.5455828814672261
+    ],
+    "scaff_matched_aupr": 0.508334193998696,
+    "scaff_matched_fpr95": 0.9489247311827957,
+    "dataset_raw_auroc": 0.5281099656357389,
+    "dataset_raw_ci": [
+      0.4865670991937242,
+      0.5697229450187798
+    ],
+    "dataset_raw_aupr": 0.2701081022930095,
+    "dataset_raw_fpr95": 0.9027982326951399,
+    "dataset_matched_auroc": 0.5207879427685811,
+    "dataset_matched_ci": [
+      0.4631159792764455,
+      0.582006508535005
+    ],
+    "dataset_matched_aupr": 0.5258093541894102,
+    "dataset_matched_fpr95": 0.9052132701421801
+  },
+  {
+    "method": "9. WL Subtree Kernel Cosine kNN (k=10)",
+    "scaff_raw_auroc": 0.46655260042161195,
+    "scaff_raw_ci": [
+      0.4304806923570041,
+      0.5020947729666729
+    ],
+    "scaff_raw_aupr": 0.3358189706453922,
+    "scaff_raw_fpr95": 0.9425625920471281,
+    "scaff_matched_auroc": 0.4900024569314371,
+    "scaff_matched_ci": [
+      0.44467102049400886,
+      0.5314841492218989
+    ],
+    "scaff_matched_aupr": 0.48551026694049637,
+    "scaff_matched_fpr95": 0.9623655913978495,
+    "dataset_raw_auroc": 0.4911962035673376,
+    "dataset_raw_ci": [
+      0.442131533052945,
+      0.5313133261101727
+    ],
+    "dataset_raw_aupr": 0.24151083040496862,
+    "dataset_raw_fpr95": 0.9455081001472754,
+    "dataset_matched_auroc": 0.5367916264234855,
+    "dataset_matched_ci": [
+      0.48354051116503743,
+      0.5977825506609631
+    ],
+    "dataset_matched_aupr": 0.5257215619781956,
+    "dataset_matched_fpr95": 0.9241706161137441
+  }
+]

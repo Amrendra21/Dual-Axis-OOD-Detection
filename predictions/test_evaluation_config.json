@@ -1,0 +1,16 @@
+{
+  "step": 5,
+  "phase": "final_frozen_test_evaluation",
+  "toxicity_checkpoint": "checkpoints/toxicity_gine/best_model.pt",
+  "validity_checkpoint": "checkpoints/validity_gine/best_validity_model.pt",
+  "novelty_estimator_path": "checkpoints/novelty_mahal/estimator.npz",
+  "embedding_dimension": 256,
+  "split_counts": {
+    "id_test": 679,
+    "corrupt_test": 543,
+    "novel_scaffold_test": 347,
+    "novel_dataset_test": 198
+  },
+  "family_c_graphs_evaluated": 181,
+  "post_evaluation_tuning": "STRICTLY FORBIDDEN. All model weights and parameters remain frozen."
+}
