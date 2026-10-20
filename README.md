@@ -412,11 +412,11 @@ python step9_audit/run_step9_audit.py
 
 | Role | Member | Primary Responsibilities & Key Deliverables |
 |:---|:---|:---|
-| **Literature Review** | Member 1 | Research background, conceptual framework, related work synthesis. |
-| **Dataset Construction** | Member 2 | Graph building, synthetic corruption engine, Bemis-Murcko splitting (`processed_v3`). |
-| **Dataset Audit** | Member 3 | Independent dataset verification, shortcut analysis, caliper matching audit (`audits/`). |
-| **Model Development & Audits** | Member 4 | GNN training, validity detector, novelty estimators, Steps 1–9 execution, paper-readiness gates. |
-| **Evaluation & Paper Integration** | Member 5 | Per-molecule prediction handoff, external validation, paper drafting and integration. |
+| **Literature Review** | Anish Chaudhary | Research background, conceptual framework, related work synthesis. |
+| **Dataset Construction** | Aanjneya Nayak | Graph building, synthetic corruption engine, Bemis-Murcko splitting (`processed_v3`). |
+| **Dataset Audit** | Amrendra Singh | Independent dataset verification, shortcut analysis, caliper matching audit (`audits/`). |
+| **Model Development & Audits** | Aryan Singh | GNN training, validity detector, novelty estimators, Steps 1–9 execution, paper-readiness gates. |
+| **Evaluation & Paper Integration** | Aditya Kanaujiya | Per-molecule prediction handoff, external validation, paper drafting and integration. |
 
 ---
 
