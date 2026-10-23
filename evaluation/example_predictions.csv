@@ -1,0 +1,16 @@
+sample_id,model_name,benchmark,true_label,ood_score,seed
+T21-00001,GCN_Energy,validity/test/A,0,0.12,42
+T21-00002,GCN_Energy,validity/test/A,0,0.18,42
+COR-A-T21-00001,GCN_Energy,validity/test/A,1,0.87,42
+T21-00001,GCN_Energy,validity/test/B,0,0.15,42
+T21-00002,GCN_Energy,validity/test/B,0,0.22,42
+COR-B-T21-00002,GCN_Energy,validity/test/B,1,0.79,42
+T21-00001,GCN_Energy,validity/test/C,0,0.11,42
+T21-00002,GCN_Energy,validity/test/C,0,0.19,42
+COR-C-T21-00003,GCN_Energy,validity/test/C,1,0.93,42
+T21-00003,GCN_Energy,novelty/test/novel_scaffold,0,0.14,42
+T21-00004,GCN_Energy,novelty/test/novel_scaffold,0,0.25,42
+T21-SCF-00010,GCN_Energy,novelty/test/novel_scaffold,1,0.68,42
+T21-00003,GCN_Energy,novelty/test/novel_dataset,0,0.13,42
+T21-00004,GCN_Energy,novelty/test/novel_dataset,0,0.21,42
+SID-00001,GCN_Energy,novelty/test/novel_dataset,1,0.71,42

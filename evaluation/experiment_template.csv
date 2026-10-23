@@ -1,0 +1,61 @@
+experiment_id,model_name,backbone,ood_detector,benchmark,id_split_pt,ood_split_pt,seed,status,auroc,aupr_out,aupr_in,fpr95,notes
+EXP_001,RandomForest_ECFP4,ECFP4_Radius2,MSP,validity/val/A,processed_v3/graphs/id_val.pt,processed_v3/graphs/corrupt_val.pt,42,PLANNED,,,,,Family A: bond-order inflation; count-only AUROC=0.493 (no shortcut). true_label from split membership not y tensor.
+EXP_002,RandomForest_ECFP4,ECFP4_Radius2,MSP,validity/val/A,processed_v3/graphs/id_val.pt,processed_v3/graphs/corrupt_val.pt,123,PLANNED,,,,,Family A: bond-order inflation; count-only AUROC=0.493 (no shortcut).
+EXP_003,RandomForest_ECFP4,ECFP4_Radius2,MSP,validity/val/A,processed_v3/graphs/id_val.pt,processed_v3/graphs/corrupt_val.pt,456,PLANNED,,,,,Family A: bond-order inflation; count-only AUROC=0.493 (no shortcut).
+EXP_004,RandomForest_ECFP4,ECFP4_Radius2,MSP,validity/val/B,processed_v3/graphs/id_val.pt,processed_v3/graphs/corrupt_val.pt,42,PLANNED,,,,,Family B: bond relocation (bond count unchanged); count-only AUROC=0.652 (borderline shortcut: degree_hist shifts in 79% of pairs).
+EXP_005,RandomForest_ECFP4,ECFP4_Radius2,MSP,validity/val/B,processed_v3/graphs/id_val.pt,processed_v3/graphs/corrupt_val.pt,123,PLANNED,,,,,Family B: bond relocation; count-only AUROC=0.652.
+EXP_006,RandomForest_ECFP4,ECFP4_Radius2,MSP,validity/val/B,processed_v3/graphs/id_val.pt,processed_v3/graphs/corrupt_val.pt,456,PLANNED,,,,,Family B: bond relocation; count-only AUROC=0.652.
+EXP_007,RandomForest_ECFP4,ECFP4_Radius2,MSP,validity/test/A,processed_v3/graphs/id_test.pt,processed_v3/graphs/corrupt_test.pt,42,PLANNED,,,,,Family A (test): clean validity benchmark; count-only AUROC=0.489.
+EXP_008,RandomForest_ECFP4,ECFP4_Radius2,MSP,validity/test/A,processed_v3/graphs/id_test.pt,processed_v3/graphs/corrupt_test.pt,123,PLANNED,,,,,Family A (test): count-only AUROC=0.489.
+EXP_009,RandomForest_ECFP4,ECFP4_Radius2,MSP,validity/test/A,processed_v3/graphs/id_test.pt,processed_v3/graphs/corrupt_test.pt,456,PLANNED,,,,,Family A (test): count-only AUROC=0.489.
+EXP_010,RandomForest_ECFP4,ECFP4_Radius2,MSP,validity/test/B,processed_v3/graphs/id_test.pt,processed_v3/graphs/corrupt_test.pt,42,PLANNED,,,,,Family B (test): count-only AUROC=0.652.
+EXP_011,RandomForest_ECFP4,ECFP4_Radius2,MSP,validity/test/B,processed_v3/graphs/id_test.pt,processed_v3/graphs/corrupt_test.pt,123,PLANNED,,,,,Family B (test): count-only AUROC=0.652.
+EXP_012,RandomForest_ECFP4,ECFP4_Radius2,MSP,validity/test/B,processed_v3/graphs/id_test.pt,processed_v3/graphs/corrupt_test.pt,456,PLANNED,,,,,Family B (test): count-only AUROC=0.652.
+EXP_013,RandomForest_ECFP4,ECFP4_Radius2,MSP,validity/test/C,processed_v3/graphs/id_test.pt,processed_v3/graphs/corrupt_test.pt,42,PLANNED,,,,,Family C: C->O atom swap (test only; held-out family). ALWAYS report separately. count-only AUROC=0.798 (structural shortcut by construction; cannot be removed).
+EXP_014,RandomForest_ECFP4,ECFP4_Radius2,MSP,validity/test/C,processed_v3/graphs/id_test.pt,processed_v3/graphs/corrupt_test.pt,123,PLANNED,,,,,Family C (test only; held-out). count-only AUROC=0.798.
+EXP_015,RandomForest_ECFP4,ECFP4_Radius2,MSP,validity/test/C,processed_v3/graphs/id_test.pt,processed_v3/graphs/corrupt_test.pt,456,PLANNED,,,,,Family C (test only; held-out). count-only AUROC=0.798.
+EXP_016,RandomForest_ECFP4,ECFP4_Radius2,MSP,novelty/val/novel_scaffold,processed_v3/graphs/id_val.pt,processed_v3/graphs/novel_scaffold_val.pt,42,PLANNED,,,,,Tox21 scaffold-held-out; ring-containing only. Compare vs matched_controls.csv. count-only AUROC=0.752; size-matched=0.689.
+EXP_017,RandomForest_ECFP4,ECFP4_Radius2,MSP,novelty/val/novel_scaffold,processed_v3/graphs/id_val.pt,processed_v3/graphs/novel_scaffold_val.pt,123,PLANNED,,,,,Tox21 scaffold-held-out; ring-containing only. count-only AUROC=0.752; size-matched=0.689.
+EXP_018,RandomForest_ECFP4,ECFP4_Radius2,MSP,novelty/val/novel_scaffold,processed_v3/graphs/id_val.pt,processed_v3/graphs/novel_scaffold_val.pt,456,PLANNED,,,,,Tox21 scaffold-held-out; ring-containing only.
+EXP_019,RandomForest_ECFP4,ECFP4_Radius2,MSP,novelty/val/novel_dataset,processed_v3/graphs/id_val.pt,processed_v3/graphs/novel_dataset_val.pt,42,PLANNED,,,,,SIDER molecules (dataset shift). y=NaN (no Tox21 labels). count-only AUROC=0.728; size-matched=0.664.
+EXP_020,RandomForest_ECFP4,ECFP4_Radius2,MSP,novelty/val/novel_dataset,processed_v3/graphs/id_val.pt,processed_v3/graphs/novel_dataset_val.pt,123,PLANNED,,,,,SIDER molecules; y=NaN. count-only AUROC=0.728; size-matched=0.664.
+EXP_021,RandomForest_ECFP4,ECFP4_Radius2,MSP,novelty/val/novel_dataset,processed_v3/graphs/id_val.pt,processed_v3/graphs/novel_dataset_val.pt,456,PLANNED,,,,,SIDER molecules; y=NaN.
+EXP_022,RandomForest_ECFP4,ECFP4_Radius2,MSP,novelty/test/novel_scaffold,processed_v3/graphs/id_test.pt,processed_v3/graphs/novel_scaffold_test.pt,42,PLANNED,,,,,Tox21 scaffold-held-out (test). count-only AUROC=0.755; size-matched=0.646.
+EXP_023,RandomForest_ECFP4,ECFP4_Radius2,MSP,novelty/test/novel_scaffold,processed_v3/graphs/id_test.pt,processed_v3/graphs/novel_scaffold_test.pt,123,PLANNED,,,,,Tox21 scaffold-held-out (test). count-only AUROC=0.755; size-matched=0.646.
+EXP_024,RandomForest_ECFP4,ECFP4_Radius2,MSP,novelty/test/novel_scaffold,processed_v3/graphs/id_test.pt,processed_v3/graphs/novel_scaffold_test.pt,456,PLANNED,,,,,Tox21 scaffold-held-out (test).
+EXP_025,RandomForest_ECFP4,ECFP4_Radius2,MSP,novelty/test/novel_dataset,processed_v3/graphs/id_test.pt,processed_v3/graphs/novel_dataset_test.pt,42,PLANNED,,,,,SIDER (test). y=NaN. count-only AUROC=0.693; size-matched=0.629.
+EXP_026,RandomForest_ECFP4,ECFP4_Radius2,MSP,novelty/test/novel_dataset,processed_v3/graphs/id_test.pt,processed_v3/graphs/novel_dataset_test.pt,123,PLANNED,,,,,SIDER (test). y=NaN. count-only AUROC=0.693; size-matched=0.629.
+EXP_027,RandomForest_ECFP4,ECFP4_Radius2,MSP,novelty/test/novel_dataset,processed_v3/graphs/id_test.pt,processed_v3/graphs/novel_dataset_test.pt,456,PLANNED,,,,,SIDER (test). y=NaN.
+EXP_028,GCN_MSP,GCN,MSP,validity/val/A,processed_v3/graphs/id_val.pt,processed_v3/graphs/corrupt_val.pt,42,PLANNED,,,,,GCN softmax confidence baseline. Family A.
+EXP_029,GCN_MSP,GCN,MSP,validity/val/B,processed_v3/graphs/id_val.pt,processed_v3/graphs/corrupt_val.pt,42,PLANNED,,,,,GCN softmax confidence baseline. Family B.
+EXP_030,GCN_MSP,GCN,MSP,validity/test/A,processed_v3/graphs/id_test.pt,processed_v3/graphs/corrupt_test.pt,42,PLANNED,,,,,GCN softmax confidence baseline. Family A (test).
+EXP_031,GCN_MSP,GCN,MSP,validity/test/B,processed_v3/graphs/id_test.pt,processed_v3/graphs/corrupt_test.pt,42,PLANNED,,,,,GCN softmax confidence baseline. Family B (test).
+EXP_032,GCN_MSP,GCN,MSP,validity/test/C,processed_v3/graphs/id_test.pt,processed_v3/graphs/corrupt_test.pt,42,PLANNED,,,,,GCN softmax confidence baseline. Family C (test; held-out).
+EXP_033,GCN_MSP,GCN,MSP,novelty/val/novel_scaffold,processed_v3/graphs/id_val.pt,processed_v3/graphs/novel_scaffold_val.pt,42,PLANNED,,,,,GCN softmax confidence baseline. Novel scaffold (val).
+EXP_034,GCN_MSP,GCN,MSP,novelty/val/novel_dataset,processed_v3/graphs/id_val.pt,processed_v3/graphs/novel_dataset_val.pt,42,PLANNED,,,,,GCN softmax confidence baseline. SIDER (val). y=NaN.
+EXP_035,GCN_MSP,GCN,MSP,novelty/test/novel_scaffold,processed_v3/graphs/id_test.pt,processed_v3/graphs/novel_scaffold_test.pt,42,PLANNED,,,,,GCN softmax confidence baseline. Novel scaffold (test).
+EXP_036,GCN_MSP,GCN,MSP,novelty/test/novel_dataset,processed_v3/graphs/id_test.pt,processed_v3/graphs/novel_dataset_test.pt,42,PLANNED,,,,,GCN softmax confidence baseline. SIDER (test). y=NaN.
+EXP_037,GCN_Energy,GCN,Energy,validity/val/A,processed_v3/graphs/id_val.pt,processed_v3/graphs/corrupt_val.pt,42,PLANNED,,,,,Energy-based score on GCN logits. Family A.
+EXP_038,GCN_Energy,GCN,Energy,validity/val/B,processed_v3/graphs/id_val.pt,processed_v3/graphs/corrupt_val.pt,42,PLANNED,,,,,Energy-based score on GCN logits. Family B.
+EXP_039,GCN_Energy,GCN,Energy,validity/test/A,processed_v3/graphs/id_test.pt,processed_v3/graphs/corrupt_test.pt,42,PLANNED,,,,,Energy-based score on GCN logits. Family A (test).
+EXP_040,GCN_Energy,GCN,Energy,validity/test/B,processed_v3/graphs/id_test.pt,processed_v3/graphs/corrupt_test.pt,42,PLANNED,,,,,Energy-based score on GCN logits. Family B (test).
+EXP_041,GCN_Energy,GCN,Energy,validity/test/C,processed_v3/graphs/id_test.pt,processed_v3/graphs/corrupt_test.pt,42,PLANNED,,,,,Energy-based score on GCN logits. Family C (test; held-out).
+EXP_042,GCN_Energy,GCN,Energy,novelty/val/novel_scaffold,processed_v3/graphs/id_val.pt,processed_v3/graphs/novel_scaffold_val.pt,42,PLANNED,,,,,Energy-based score. Novel scaffold (val).
+EXP_043,GCN_Energy,GCN,Energy,novelty/val/novel_dataset,processed_v3/graphs/id_val.pt,processed_v3/graphs/novel_dataset_val.pt,42,PLANNED,,,,,Energy-based score. SIDER (val). y=NaN.
+EXP_044,GCN_Energy,GCN,Energy,novelty/test/novel_scaffold,processed_v3/graphs/id_test.pt,processed_v3/graphs/novel_scaffold_test.pt,42,PLANNED,,,,,Energy-based score. Novel scaffold (test).
+EXP_045,GCN_Energy,GCN,Energy,novelty/test/novel_dataset,processed_v3/graphs/id_test.pt,processed_v3/graphs/novel_dataset_test.pt,42,PLANNED,,,,,Energy-based score. SIDER (test). y=NaN.
+EXP_046,GIN_MSP,GIN,MSP,validity/test/A,processed_v3/graphs/id_test.pt,processed_v3/graphs/corrupt_test.pt,42,PLANNED,,,,,GIN standard softmax baseline. Family A.
+EXP_047,GIN_MSP,GIN,MSP,validity/test/B,processed_v3/graphs/id_test.pt,processed_v3/graphs/corrupt_test.pt,42,PLANNED,,,,,GIN standard softmax baseline. Family B.
+EXP_048,GIN_MSP,GIN,MSP,validity/test/C,processed_v3/graphs/id_test.pt,processed_v3/graphs/corrupt_test.pt,42,PLANNED,,,,,GIN standard softmax baseline. Family C (held-out).
+EXP_049,GIN_MSP,GIN,MSP,novelty/test/novel_scaffold,processed_v3/graphs/id_test.pt,processed_v3/graphs/novel_scaffold_test.pt,42,PLANNED,,,,,GIN standard softmax baseline. Novel scaffold.
+EXP_050,GIN_MSP,GIN,MSP,novelty/test/novel_dataset,processed_v3/graphs/id_test.pt,processed_v3/graphs/novel_dataset_test.pt,42,PLANNED,,,,,GIN standard softmax baseline. SIDER (y=NaN).
+EXP_051,GIN_Energy,GIN,Energy,validity/test/A,processed_v3/graphs/id_test.pt,processed_v3/graphs/corrupt_test.pt,42,PLANNED,,,,,Energy score on GIN representations. Family A.
+EXP_052,GIN_Energy,GIN,Energy,validity/test/B,processed_v3/graphs/id_test.pt,processed_v3/graphs/corrupt_test.pt,42,PLANNED,,,,,Energy score on GIN representations. Family B.
+EXP_053,GIN_Energy,GIN,Energy,validity/test/C,processed_v3/graphs/id_test.pt,processed_v3/graphs/corrupt_test.pt,42,PLANNED,,,,,Energy score on GIN representations. Family C (held-out).
+EXP_054,GIN_Energy,GIN,Energy,novelty/test/novel_scaffold,processed_v3/graphs/id_test.pt,processed_v3/graphs/novel_scaffold_test.pt,42,PLANNED,,,,,Energy score on GIN. Novel scaffold.
+EXP_055,GIN_Energy,GIN,Energy,novelty/test/novel_dataset,processed_v3/graphs/id_test.pt,processed_v3/graphs/novel_dataset_test.pt,42,PLANNED,,,,,Energy score on GIN. SIDER (y=NaN).
+EXP_056,GAT_Mahalanobis,GAT,Mahalanobis,validity/test/A,processed_v3/graphs/id_test.pt,processed_v3/graphs/corrupt_test.pt,42,PLANNED,,,,,Feature-space Mahalanobis distance with GAT. Family A.
+EXP_057,GAT_Mahalanobis,GAT,Mahalanobis,validity/test/B,processed_v3/graphs/id_test.pt,processed_v3/graphs/corrupt_test.pt,42,PLANNED,,,,,Feature-space Mahalanobis distance. Family B.
+EXP_058,GAT_Mahalanobis,GAT,Mahalanobis,validity/test/C,processed_v3/graphs/id_test.pt,processed_v3/graphs/corrupt_test.pt,42,PLANNED,,,,,Feature-space Mahalanobis distance. Family C (held-out).
+EXP_059,GAT_Mahalanobis,GAT,Mahalanobis,novelty/test/novel_scaffold,processed_v3/graphs/id_test.pt,processed_v3/graphs/novel_scaffold_test.pt,42,PLANNED,,,,,Feature-space Mahalanobis distance. Novel scaffold.
+EXP_060,GAT_Mahalanobis,GAT,Mahalanobis,novelty/test/novel_dataset,processed_v3/graphs/id_test.pt,processed_v3/graphs/novel_dataset_test.pt,42,PLANNED,,,,,Feature-space Mahalanobis distance. SIDER (y=NaN).
